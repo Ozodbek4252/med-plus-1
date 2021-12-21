@@ -1,4 +1,7 @@
-
+Run these commads:
+1. composer install
+2. npm install
+3. php artisan key:generate
 
 Did:
 1. composer require laravel/ui
