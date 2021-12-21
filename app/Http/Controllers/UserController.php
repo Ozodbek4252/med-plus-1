@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,8 @@ class UserController extends Controller
         return view('dashboards.users.profile');
     }
 
-    function settings() {
-        return view('dashboards.users.settings');
+    function completeacccount() {
+        $data = Auth::user();
+        return view('dashboards.users.components.completeacccount', compact("data"));
     }
 }
