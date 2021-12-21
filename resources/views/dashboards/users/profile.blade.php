@@ -85,7 +85,7 @@
 <body>
     <div class="container">
         <nav class="nav">
-          <a class="nav-back-a" href="/"><span><i class="fas fa-chevron-left"></i>Back Home</span></a>
+          <a class="nav-back-a" href="{{route('user.dashboard')}}"><span><i class="fas fa-chevron-left"></i>Back Home</span></a>
           <div class="dropdown">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Account
