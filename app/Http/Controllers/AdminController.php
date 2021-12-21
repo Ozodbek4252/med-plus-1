@@ -12,13 +12,9 @@ class AdminController extends Controller
         return view('dashboards.admins.index');
     }
     
-    function profile() {
-        return view('dashboards.admins.profile');
-    }
-
-    function settings() {
-        return view('dashboards.admins.settings');
-    }
+    // function profile() {
+    //     return view('dashboards.admins.profile');
+    // }
 
     public function users()
     {        
@@ -26,7 +22,7 @@ class AdminController extends Controller
         // $data = User::latest()->paginate(3);
     	$data = User::all();
 
-        return view("dashboards.admins.userTable", compact("data"));
+        return view("dashboards.admins.components.userTable", compact("data"));
         // $address = address::all();
     	// $num = 1;
 
@@ -36,5 +32,10 @@ class AdminController extends Controller
         //     ->get();
 
     	// return view("admin.users", compact("data", "num", "address", "users"));
+    }
+    
+    function addClinic($id) {
+        $data = User::find($id);
+        return view('dashboards.admins.components.addClinic', compact("data"));
     }
 }

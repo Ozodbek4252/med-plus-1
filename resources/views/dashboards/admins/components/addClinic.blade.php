@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <base href="/public">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -72,28 +72,7 @@
                     <div class="ibox-content">
 
                         <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($data as $data)
-                        <tr class="gradeX">
-                            <td>{{$data->first_name}} {{$data->last_name}}</td>
-                            <td>{{$data->email}}</td>
-                            <td>Win 95+</td>
-                            <td class="center">4</td>
-                            <td class="center">X</td>
-                        </tr>
-                    @endforeach
-                    </tfoot>
-                    </table>
+                    
                         </div>
 
                     </div>
@@ -141,7 +120,7 @@
                     {extend: 'pdf', title: 'ExampleFile'},
 
                     {extend: 'print',
-                     customize: function (win){
+                        customize: function (win){
                             $(win.document.body).addClass('white-bg');
                             $(win.document.body).css('font-size', '10px');
 

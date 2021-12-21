@@ -54,7 +54,7 @@
     .body-wrapper {
       display: flex;
       justify-content: space-between;
-      margin: 30px 0;
+      margin: 15px 0;
     }
     .left-form-wrap {
       display: flex;
@@ -67,7 +67,6 @@
     }
     .body-right {
       width: 48%;
-      background-color: #888;
     }
 
     .left-form {
@@ -76,9 +75,15 @@
     .left-form-div {
       display: flex;
       flex-direction: column;
+      margin-bottom: 15px;
     }
+      </style>
 
-  </style>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 </head>
 <body>
@@ -87,7 +92,7 @@
           <a class="nav-back-a" href="{{route('user.profile')}}"><span><i class="fas fa-chevron-left"></i>Back</span></a>
           <div class="dropdown">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Account
+              {{Auth::user()->first_name}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <a href="{{route('user.profile')}}"><button class="dropdown-item" type="button">Account</button></a>
@@ -105,49 +110,256 @@
         
         <div class="body">
           <div class="body-head">
-            <h1>Profile Information</h1>
+            <h1>Complete Your Profile</h1>
           </div>
+
           <div class="body-wrapper">
-            <div class="body-left">
-              <h5>Update your account's profile information and email address.</h5>
-              <div class="left-form-wrap">
-                <form class="left-form" action="" method="">
+            <form class="left-form" action="{{route('user.completeacccountSave', Auth::user()->id)}}" method="post" style="width: 100%;"  enctype="multipart/form-data">
+              @csrf
+              <div style="display: flex; justify-content: space-between;">
+                <div class="body-left">
 
-                  <div class="left-form-div">
-                    <label for="first_name">First Name</label>
-                    <input type="text" name="first_name" value="{{Auth::user()->first_name}}" id="first_name" placeholder="First Name">
+                    <div class="left-form-div">
+                      <label for="first_name">First Name</label>
+                      <input type="text" name="first_name" value="{{Auth::user()->first_name}}" id="first_name" placeholder="First Name"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500">
+                    </div>
+
+                    <div class="left-form-div">
+                      <label for="last_name">Last Name</label>
+                      <input type="text" name="last_name" value="{{Auth::user()->last_name}}" id="last_name" placeholder="Last Name"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500">
+                    </div>
+
+                    <div class="left-form-div">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" value="{{Auth::user()->email}}" id="email" placeholder="Email"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500">
+                      
+                    </div>
+
+                    <div class="left-form-div">
+                      <label for="phone">Phone</label>
+                      @if(!Auth::user()->phone)
+                        <input style="width: 100%;" id="phone" type="tel" value="" name="phone" 
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500"/>
+                      @else
+                        <input style="width: 100%;" id="phone" type="tel" value="{{Auth::user()->phone}}" name="phone" 
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500"/>
+                      @endif
+                    </div>
+                    <p>Format: 944424252</p>
+
+                </div>
+
+                <div class="body-right">
+
+                  <div style="width: 100%" class="left-form-div">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                    Viloyat
+                  </label>
+                  <div class="relative">
+                    <select style="width: 100%" name="state" class="block appearance-none w-full bg-gray-200 
+                            border border-gray-500 text-gray-700 py-3 px-4 pr-8 rounded 
+                            leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                            id="grid-state">
+                      <option>Select</option>
+                      <option value="Toshkent">Toshkent</option>
+                      <option value="Farg'ona">Farg'ona</option>
+                      <option value="Andijon">Andijon</option>
+                      <option value="Namangan">Namangan</option>
+                      <option value="Sirdaryo">Sirdaryo</option>
+                      <option value="Samarqand">Samarqand</option>
+                      <option value="Jizzax">Jizzax</option>
+                      <option value="Buxoro">Buxoro</option>
+                      <option value="Navoiy">Navoiy</option>
+                      <option value="Qashqadaryo">Qashqadaryo</option>
+                      <option value="Surxondaryo">Surxondaryo</option>
+                      <option value="Xorazm">Xorazm</option>
+                      <option value="Qoraqolpog'iston">Qoraqolpog'iston</option>
+                    </select>
+                  </div>
                   </div>
 
-                  <div class="left-form-div">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" name="last_name" value="{{Auth::user()->last_name}}" id="last_name" placeholder="Last Name">
+                  <div style="width: 100%" class="left-form-div">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                      Shahar / Tuman
+                    </label>
+                      <input style="width: 100%" value="" name="city" class="appearance-none block w-full bg-gray-200 text-gray-700 
+                              border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none 
+                              focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Angren">
                   </div>
 
-                  <div class="left-form-div">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" value="{{Auth::user()->email}}" id="email" placeholder="Email">
+                  <div style="width: 100%;"  class="left-form-div">
+                	<label style="width: 100%;" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-date">
+                      Date Of Birth
+                  </label>
+                  <input value="{{Auth::user()->date_of_birth}}" name="date_of_birth" type="date" 
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border 
+                          border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none 
+                          focus:bg-white focus:border-gray-500" id="grid-date">
                   </div>
 
-                  <input type="submit" value="Save">
+                  <div class="left-form-div" style="width: 100%; margin-bottom: 5px !important;">
+        	          <label style="width: 100%;" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
+                        Jinsi
+                    </label>
+                    <div style="display: flex; width: 100%" class="w-full md:w-1/3 mb-6 md:mb-0">
+                      @if(Auth::user()->gender)
+                        @if(Auth::user()->gender == 'male')
+                          <div style="padding: 0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-male">
+                            Male
+                            </label>
+                            <input id="grid-male" checked name="gender" value="male" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+                          </div>
+                          <div style="padding: 0; padding-left: 30px;">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-female">
+                              Female
+                            </label>
+                            <input id="grid-female" name="gender" value="female" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+                          </div>
+                        @else
+                          <div style="padding: 0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-male">
+                            Male
+                            </label>
+                            <input id="grid-male" name="gender" value="male" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+                          </div>
+                          <div style="padding: 0; padding-left: 30px;">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-female">
+                              Female
+                            </label>
+                            <input id="grid-female" checked name="gender" value="female" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+                          </div>
+                        @endif
 
-                </form>
+                      @else
+                      	<div style="padding: 0">
+                        	<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-male">
+                          Male
+                        	</label>
+        	            	  <input id="grid-male" name="gender" value="male" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+        	            	</div>
+        	            	<div style="padding: 0; padding-left: 30px;">
+        	            	  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-female">
+                            Female
+                        	</label>
+        	            	  <input id="grid-female" name="gender" value="female" type="radio" class="appearance-none checked:bg-blue-500 ..." />
+        	            	</div>
+                      @endif
+        	          </div>
+        	        </div>
+
+                </div>
               </div>
-            </div>
-            <div class="body-right">
-              <h4>Update Password</h4>
-
-            </div>
+              <button style="margin-top: 10px;" type="submit" class="btn btn-success">Save</button>
+            </form>
           </div>
         </div>
     </div>
 
 
 
+    <script>
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      const info = document.querySelector(".alert-info");
+
+      function process(event) {
+        event.preventDefault();
+      
+        const phoneNumber = phoneInput.getNumber();
+      
+        info.style.display = "";
+        info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+      }
+
+      function getIp(callback) {
+        fetch('https://ipinfo.io/json?token=<your token>', { headers: { 'Accept': 'application/json' }})
+          .then((resp) => resp.json())
+          .catch(() => {
+            return {
+              country: 'us',
+            };
+          })
+          .then((resp) => callback(resp.country));
+      }
+      
+      // const info = document.querySelector(".alert-info");
+
+function process(event) {
+ event.preventDefault();
+
+ const phoneNumber = phoneInput.getNumber();
+
+ info.style.display = "";
+ info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+}
+
+function getIp(callback) {
+ fetch('https://ipinfo.io/json?token=<your token>', { headers: { 'Accept': 'application/json' }})
+   .then((resp) => resp.json())
+   .catch(() => {
+     return {
+       country: 'us',
+     };
+   })
+   .then((resp) => callback(resp.country));
+}
+
+// const phoneInput = window.intlTelInput(phoneInputField, {
+//  initialCountry: "auto",
+//  geoIpLookup: getIp,
+//  utilsScript:
+//    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+// });
+
+// const phoneInput = window.intlTelInput(phoneInputField, {
+//   preferredCountries: ["us", "co", "in", "de"],
+//   utilsScript:
+//     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+// });
+
+    </script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script>
+      $(document).ready(function() {
+        fetchData();
+        function fetchData() {
+          $.ajax({
+            type: "get",
+            url: "fetchData",
+            dataType: "json",
+            success: function(response) {
+              console.log(response.data);
+            }
+          
+          });
+        }
+      });
+  </script>
+
+
 </body>
 </html>
 
