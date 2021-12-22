@@ -24,7 +24,7 @@
                 <a class="nav-link" href="departments.html">Departments</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url('/clinics')}}">Clinics</a>
+                <a class="nav-link" href="{{ route('user.clinics') }}">Clinics</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>

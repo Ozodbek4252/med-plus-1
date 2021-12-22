@@ -8,6 +8,7 @@ use App\Models\Clinic;
 use App\Models\ClinicLink;
 use App\Models\ClinicWorkDay;
 use App\Models\ClinicAddress;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -46,6 +47,8 @@ class AdminController extends Controller
   }
 
   function addClinicSave(Request $request, $id) {
+    $data = User::all();
+
     $clinic = new Clinic;
     $clinicLink = new ClinicLink;
     $clinicWorkDay = new ClinicWorkDay;
@@ -57,30 +60,77 @@ class AdminController extends Controller
     $clinic->logo = $request->logo;
     $clinic->save();
 
-    $clinicLink->clinic_id = $clinic->id;
-    $clinicLink->tg = $request->tg;
-    $clinicLink->fb = $request->fb;
-    $clinicLink->email = $request->email;
-    $clinicLink->insta = $request->insta;
-    $clinicLink->save();
+    if($request->tg != null || $request->fb != null || $request->insta != null || $request->email != null){
+      $clinicLink->clinic_id = $clinic->id;
+      $clinicLink->tg = $request->tg;
+      $clinicLink->fb = $request->fb;
+      $clinicLink->email = $request->email;
+      $clinicLink->insta = $request->insta;
+      $clinicLink->save();
+      $clinic->link = $clinicLink->id;
+    }
 
-    $clinicWorkDay->clinic_id = $clinic->id;
-    $clinicWorkDay->mon = $request->monstart.' - '.$request->monend;
-    $clinicWorkDay->tue = $request->tuestart.' - '.$request->tueend;
-    $clinicWorkDay->wed = $request->wedstart.' - '.$request->wedend;
-    $clinicWorkDay->thu = $request->thustart.' - '.$request->thuend;
-    $clinicWorkDay->fri = $request->fristart.' - '.$request->friend;
-    $clinicWorkDay->sat = $request->satstart.' - '.$request->satend;
-    $clinicWorkDay->sun = $request->sunstart.' - '.$request->sunend;
-    $clinicWorkDay->save();
+    if($request->mon != null || $request->tue != null || $request->wed != null || 
+      $request->thu != null || $request->fri != null || $request->sat != null || 
+      $request->sun != null ){
+      $clinicWorkDay->clinic_id = $clinic->id;
+      if($request->mon != null){
+        $clinicWorkDay->mon = $request->monstart.' - '.$request->monend;
+      }
+      if($request->tue != null){
+        $clinicWorkDay->tue = $request->tuestart.' - '.$request->tueend;
+      }
+      if($request->wed != null){
+        $clinicWorkDay->wed = $request->wedstart.' - '.$request->wedend;
+      }
+      if($request->thu != null){
+        $clinicWorkDay->thu = $request->thustart.' - '.$request->thuend;
+      }
+      if($request->fri != null){
+        $clinicWorkDay->fri = $request->fristart.' - '.$request->friend;
+      }
+      if($request->sat != null){
+        $clinicWorkDay->sat = $request->satstart.' - '.$request->satend;
+      }
+      if($request->sun != null){
+        $clinicWorkDay->sun = $request->sunstart.' - '.$request->sunend;
+      }
+      $clinicWorkDay->save();
+      $clinic->workday = $clinicWorkDay->id;
+    }
 
-    $clinicAddress->clinic_id = $clinic->id();
-    $clinicAddress->state = $request->state;
+    $clinicAddress->clinic_id = $clinic->id;
+    if($request->state != 'Choose...'){
+      $clinicAddress->state = $request->state;
+    }else{
+      $clinicAddress->state = null;
+    }
     $clinicAddress->city = $request->city;
     $clinicAddress->street = $request->street;
     $clinicAddress->apartment = $request->apartment;
     $clinicAddress->save();
+    $clinic->address = $clinicAddress->id;
 
+    $clinic->save();
 
+    return redirect()->route('admin.users');
+  }
+
+  function clinics(){
+    $data = DB::table('clinics')
+          ->join('clinic_addresses', 'clinics.address', 'clinic_addresses.id')
+          ->join('users', 'clinics.user_id', 'users.id')
+          ->join('clinic_work_days', 'clinics.workday', 'clinic_work_days.id')
+          ->join('clinic_links', 'clinics.link', 'clinic_links.id')
+          ->select('clinics.*', 'clinic_addresses.*', 'users.first_name', 'users.last_name', 'clinic_work_days.*', 'clinic_links.*')
+          ->get();
+
+    return view("dashboards.admins.components.clinicTable", compact("data"));
+  }
+
+  function editClinic(Request $request, $id) {
+    $data = Clinic::find($id);
+
+    return redirect()->route('admin.clinics');
   }
 }

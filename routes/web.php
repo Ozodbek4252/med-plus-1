@@ -30,8 +30,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventBackHistory']], function () {
   Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
   Route::get('users', [AdminController::class, 'users'])->name('admin.users');
+  Route::get('clinics', [AdminController::class, 'clinics'])->name('admin.clinics');
   Route::get('addClinic/{id}', [AdminController::class, 'addClinic'])->name('admin.addClinic');
   Route::post('addClinicSave/{id}', [AdminController::class, 'addClinicSave'])->name('addClinicSave');
+  Route::post('editClinic/{id}', [AdminController::class, 'editClinic'])->name('admin.editClinic');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -39,5 +41,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
   Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
   Route::get('completeacccount', [UserController::class, 'completeacccount'])->name('user.completeacccount');
   Route::post('completeacccount/{id}', [UserController::class, 'completeacccountSave'])->name('user.completeacccountSave');
+  Route::get('clinics', [UserController::class, 'clinics'])->name('user.clinics');
   // Route::get('fetchData', [UserController::class, 'fetchData'])->name('fetchData');
 });
