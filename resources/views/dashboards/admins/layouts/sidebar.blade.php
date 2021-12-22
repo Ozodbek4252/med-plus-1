@@ -126,6 +126,7 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="table_basic.html">Static Tables</a></li>
                             <li><a href="{{route('admin.users')}}">Users</a></li>
+                            <li><a href="{{route('admin.clinics')}}">Clinics</a></li>
                             <li><a href="table_foo_table.html">Foo Tables</a></li>
                             <li><a href="jq_grid.html">jqGrid</a></li>
                         </ul>
