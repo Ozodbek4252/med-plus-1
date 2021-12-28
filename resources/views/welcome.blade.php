@@ -29,7 +29,7 @@
 
                         @if ( Auth::user()->role == 1)
                             <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 underline">Home</a>
-                                                 
+                                            
                         @endif
 
                         @if ( Auth::user()->role == 2)
