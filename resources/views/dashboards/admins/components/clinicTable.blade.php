@@ -95,7 +95,7 @@
                         <td>{{$data->phone}}</td>
                         <td>{{$data->apartment}} {{$data->street}} {{$data->city}} {{$data->state}}</td>
                         <td class="center">
-                          <ul>
+                          <ul style="padding: 0">
                             @if($data->mon != null)
                               <li style="list-style-type: none;">{{$data->mon}}</li>
                             @endif
@@ -120,7 +120,7 @@
                           </ul>
                         </td>
                         <td class="center">
-                          <ul>
+                          <ul style="padding: 0">
                             <li style="list-style-type: none;">{{$data->email}}</li>
                             <li style="list-style-type: none;">{{$data->tg}}</li>
                             <li style="list-style-type: none;">{{$data->fb}}</li>
