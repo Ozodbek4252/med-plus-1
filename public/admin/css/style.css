@@ -1,11 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
-/*
- *
- *   INSPINIA - Responsive Admin Theme
- *   version 2.7
- *
-*/
+
 h1,
 h2,
 h3,
@@ -6797,12 +6792,7 @@ body.body-small .vote-icon {
   right: 0;
   z-index: 2000;
 }
-/*
- *
- *   INSPINIA Landing Page - Responsive Admin Theme
- *   Copyright 2014 Webapplayers.com
- *
-*/
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* PACE PLUGIN
@@ -7736,12 +7726,7 @@ body.rtls.top-navigation .footer.fixed {
 .ultra-skin:hover {
   background: url("patterns/4.png") repeat scroll 0 0;
 }
-/*
- *
- *   SKIN 1 - INSPINIA - Responsive Admin Theme
- *   NAME - Blue light
- *
-*/
+
 .skin-1 .minimalize-styl-2 {
   margin: 14px 5px 5px 30px;
 }
@@ -7842,12 +7827,7 @@ body.skin-1 {
 .skin-1 .nav.nav-tabs > li.active {
   background: transparent;
 }
-/*
- *
- *   SKIN 2 - INSPINIA - Responsive Admin Theme
- *   NAME - Inspinia Ultra
- *
-*/
+
 body.skin-2 {
   color: #565758 !important;
 }
@@ -7992,12 +7972,7 @@ body.skin-2 #wrapper {
 .skin-2 .nav.nav-tabs > li.active {
   background: transparent;
 }
-/*
- *
- *   SKIN 3 - INSPINIA - Responsive Admin Theme
- *   NAME - Yellow/purple
- *
-*/
+
 .skin-3 .minimalize-styl-2 {
   margin: 14px 5px 5px 30px;
 }

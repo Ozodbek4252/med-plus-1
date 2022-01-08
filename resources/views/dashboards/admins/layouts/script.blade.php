@@ -47,7 +47,7 @@
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.success('Responsive Admin Theme', 'Welcome to Vortex');
+                toastr.success('.', 'Welcome to Vortex');
 
             }, 1300);
 

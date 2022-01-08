@@ -1,8 +1,6 @@
 /*!
- *   AdminLTE v3.1.0
  *     Only Components
  *   Author: Colorlib
- *   Website: AdminLTE.io <https://adminlte.io>
  *   License: Open source - MIT <https://opensource.org/licenses/MIT>
  */
 @-webkit-keyframes flipInX {
@@ -12081,4 +12079,3 @@ button.close {
 a.close.disabled {
   pointer-events: none;
 }
-/*# sourceMappingURL=adminlte.components.css.map */
