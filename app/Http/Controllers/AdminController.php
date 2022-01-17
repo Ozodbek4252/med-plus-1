@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Clinic;
+use App\Models\Doctor;
 use App\Models\ClinicLink;
 use App\Models\ClinicWorkDay;
 use App\Models\ClinicAddress;
@@ -50,7 +51,7 @@ class AdminController extends Controller
   function addClinicSave(Request $request, $id)
   {
     $data = User::all();
-dd(gettype($request->logo));
+    dd(gettype($request->logo));
     $request->logo->move('admins', "ok.png");
 
     $clinic = new Clinic;
@@ -117,10 +118,10 @@ dd(gettype($request->logo));
     $clinicAddress->save();
     $clinic->address = $clinicAddress->id;
 
-      // foreach ($files as $file) {//this statement will loop through all files.
-      //     $file_name = $file->getClientOriginalName(); //Get file original name
-      //     $file->move('admins' , $file_name); // move files to destination folder
-      // }
+    // foreach ($files as $file) {//this statement will loop through all files.
+    //     $file_name = $file->getClientOriginalName(); //Get file original name
+    //     $file->move('admins' , $file_name); // move files to destination folder
+    // }
 
 
     $image = $request->myImage;
@@ -160,5 +161,97 @@ dd(gettype($request->logo));
 
 
     return view('dashboards.admins.components.editClinic', compact("data", "address", "link", "workday"));
+  }
+
+  public function doctors()
+  {
+    $data = Doctor::all();
+    $doctor = DB::table('doctors')
+      ->join('clinic_work_days', 'doctors.workDays', 'clinic_work_days.id')
+      ->select('doctors.*', 'clinic_work_days.*')
+      ->get();
+    return view('dashboards.admins.components.doctorsTable', compact("data"));
+  }
+
+  public function addDoctor()
+  {
+    $clinic = Clinic::all();
+    return view('dashboards.admins.components.addDoctor', compact("clinic"));
+  }
+
+  public function addDoctorSave(Request $req)
+  {
+    $doctor = new Doctor;
+    $doctor->first_name = $req->get('first_name');
+    $doctor->last_name = $req->get('last_name');
+    if ($req->get('email')) {
+      $doctor->email = $req->get('email');
+    }
+    if ($req->get('phone')) {
+      $doctor->phone = $req->get('phone');
+    }
+
+    dd($req->imagee);
+    // dd($req->imagee->extension());
+    // image
+
+    $doctor->date_of_birth = $req->get('date_of_birth');
+    $doctor->clinic = intval($req->clinic);
+
+    if ($req->speciality) {
+      $doctor->specialities = implode(", ", $req->get('speciality'));
+    }
+
+    $doctor->save();
+    if (
+      $req->mon != null || $req->tue != null || $req->wed != null ||
+      $req->thu != null || $req->fri != null || $req->sat != null ||
+      $req->sun != null
+    ) {
+      $workDay = new ClinicWorkDay;
+      $workDay->doctor_id = $doctor->id;
+      if ($req->mon != null) {
+        $workDay->mon = $req->monstart . ' - ' . $req->monend;
+      }
+      if ($req->tue != null) {
+        $workDay->tue = $req->tuestart . ' - ' . $req->tueend;
+      }
+      if ($req->wed != null) {
+        $workDay->wed = $req->wedstart . ' - ' . $req->wedend;
+      }
+      if ($req->thu != null) {
+        $workDay->thu = $req->thustart . ' - ' . $req->thuend;
+      }
+      if ($req->fri != null) {
+        $workDay->fri = $req->fristart . ' - ' . $req->friend;
+      }
+      if ($req->sat != null) {
+        $workDay->sat = $req->satstart . ' - ' . $req->satend;
+      }
+      if ($req->sun != null) {
+        $workDay->sun = $req->sunstart . ' - ' . $req->sunend;
+      }
+      $workDay->save();
+      $doctor->workDays = $workDay->id;
+      $doctor->save();
+    }
+
+    if ($req->get('experience')) {
+      $doctor->experience = $req->get('experience');
+    }
+    if ($req->get('summary')) {
+      $doctor->summary = $req->get('summary');
+    }
+
+    $doctor->save();
+
+    return redirect()->route('admin.doctors');
+  }
+
+  public function editDoctor(Request $request, $id)
+  {
+    $data = doctor::find($id);
+
+    return view('dashboards.admins.components.editDoctor', compact("data"));
   }
 }
