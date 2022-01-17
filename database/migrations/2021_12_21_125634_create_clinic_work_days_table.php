@@ -15,7 +15,8 @@ class CreateClinicWorkDaysTable extends Migration
     {
         Schema::create('clinic_work_days', function (Blueprint $table) {
             $table->id();
-            $table->string('clinic_id');
+            $table->string('clinic_id')->nullable();
+            $table->string('doctor_id')->nullable();
             $table->string('mon')->nullable();
             $table->string('tue')->nullable();
             $table->string('wed')->nullable();

@@ -11,6 +11,7 @@ class ClinicWorkDay extends Model
 
     protected $fillable = [
         'clinic_id',
+        'doctor_id',
         'mon',
         'tue',
         'wed',

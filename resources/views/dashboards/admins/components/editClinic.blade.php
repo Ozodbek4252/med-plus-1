@@ -108,7 +108,7 @@
                       <select value="asd" style="background-color: #99999915;" name="state" id="inputState" class="form-control" required="">
                         <option>Choose...</option>
                         <option value="Toshkent">Toshkent</option>
-                        <option value="Farg'ona">Farg'ona</option>
+                        <option selected value="Farg'ona">Farg'ona</option>
                         <option value="Andijon">Andijon</option>
                         <option value="Namangan">Namangan</option>
                         <option value="Sirdaryo">Sirdaryo</option>
