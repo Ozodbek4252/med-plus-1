@@ -26,9 +26,8 @@
     }
 
     .bg-white {
-      background-color: #fff !important;
-      color: #000;
-      line-height: 50px;
+      background-color: #191c24 !important;
+      background-color: #777 !important;
     }
 
     span[aria-current] span {
@@ -194,8 +193,6 @@
             </form>
           </div>
 
-
-
           <div class="card-wrapper">
             <div class="clinics-to-doctors">
               <div class="clinics-route clinics-border">
@@ -207,13 +204,13 @@
             </div>
 
 
-            @foreach($clinics as $clinic)
+            @foreach($data as $data)
             <div class="cards">
               <div class="card">
                 <div class="col-lg-3">
                   <div class="card-left">
                     <a href="" class="card-logo-a">
-                      <img class="card-logo" src="images/logo.jpg">
+                      <img class="card-logo" src="images/d2.jpg">
                     </a>
                     <div class="card-review">
                       <b>0</b> отзывов
@@ -230,95 +227,49 @@
                   </div>
                 </div>
 
-                <div class="col-lg-4">
-                  <div class="card-middle">
-                    <a href="">
-                      Клиника
-                      <b>{{ $clinic->name }}</b>
-                    </a>
-                    <div class="card-links">
-                      @if($clinic->link == null)
-                      <i class="fab fa-facebook"></i>
-                      <i class="fab fa-twitter"></i>
-                      <i class="fab fa-telegram"></i>
-                      <i class="fab fa-instagram"></i>
-                      @else
-                      @if($clinic->clinicLink->fb != null)
-                      <a href="{{$clinic->clinicLink->fb}}"><i class="fab fa-facebook"></i></a>
-                      @endif
-                      @if($clinic->clinicLink->email != null)
-                      <a href="{{$clinic->clinicLink->email}}"><i class="fab fa-twitter"></i></a>
-                      @endif
-                      @if($clinic->clinicLink->tg != null)
-                      <a href="{{$clinic->clinicLink->tg}}"><i class="fab fa-telegram"></i></a>
-                      @endif
-                      @if($clinic->clinicLink->insta != null)
-                      <a href="{{$clinic->clinicLink->insta}}"><i class="fab fa-instagram"></i></a>
-                      @endif
-                      @endif
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-5">
+                <div class="col-lg-8">
                   <div class="card-right">
-                    <div class="card-address">
-                      <i class="fas fa-map-marker-alt"></i>
-
-                      @if($clinic->address == null)
-                      <p>Алмазарский район, г. Ташкент, проезд Лабзак, 10 Лабзак, Напротив главного входа парка Локомотив Анхор</p>
-                      @else
-                      @if($clinic->ClinicAddress->apartment!=null)
-                      {{$clinic->ClinicAddress->apartment}}
-                      @endif
-                      @if($clinic->ClinicAddress->street!=null)
-                      {{$clinic->ClinicAddress->street}}
-                      @endif
-                      @if($clinic->ClinicAddress->city!=null)
-                      {{$clinic->ClinicAddress->city}}
-                      @endif
-                      @if($clinic->ClinicAddress->state!=null)
-                      {{$clinic->ClinicAddress->state}}
-                      @endif
-                      @endif
-
+                    <div class="card-full_name">
+                      Dr. Henry House
                     </div>
+                    <div class="card-speciality">
+                      Радиолог
+                    </div>
+                    <div class="card-expreience">
+                      12 yil
+                    </div>
+                    <div class="card-cilinic">
+                      <span>
+                        <i class="fas fa-hospital"></i>
+                      </span>
+                      Clinic Name
+                    </div>
+                    <div class="card-address card-address-doctor">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <p>Алмазарский район, г. Ташкент, проезд Лабзак, 10 Лабзак, Напротив главного входа парка Локомотив Анхор</p>
+                    </div>
+
                     <div class="card-metro">
                       <i class="fab fa-monero"></i><span>Minor</span>
                     </div>
                     <div class="card-time">
-                      @if($clinic->workday != null)
                       <i class="far fa-clock"></i>
                       <ul>
                         <li></li>
-                        @if($clinic->clinicWorkDay->mon!=null)
-                        <li style="line-height: 100%;">Mon: {{$clinic->clinicWorkDay->mon}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->tue!=null)
-                        <li style="line-height: 100%;">Tue: {{$clinic->clinicWorkDay->tue}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->wed!=null)
-                        <li style="line-height: 100%;">Wed: {{$clinic->clinicWorkDay->wed}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->thu!=null)
-                        <li style="line-height: 100%;">Thu: {{$clinic->clinicWorkDay->thu}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->fri!=null)
-                        <li style="line-height: 100%;">Fri: {{$clinic->clinicWorkDay->fri}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->sat!=null)
-                        <li style="line-height: 100%;">Sat: {{$clinic->clinicWorkDay->sat}}</li>
-                        @endif
-                        @if($clinic->clinicWorkDay->sun!=null)
-                        <li style="line-height: 100%;">Sun: {{$clinic->clinicWorkDay->sun}}</li>
-                        @endif
+                        <li style="line-height: 100%;">Mon: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Tue: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Wed: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Thu: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Fri: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Sat: 9:30 - 6:00</li>
+                        <li style="line-height: 100%;">Sun: 9:30 - 6:00</li>
+
                       </ul>
-                      @endif
                     </div>
                     <div class="card-phone">
-                      <a href="tel:{{$clinic->phone}}">
+                      <a href="tel:+998944424252">
                         <i class="fas fa-phone-alt"></i>
-                        {{$clinic->phone}}
+                        +998 94 442 42 52
                       </a>
                     </div>
                     <div class="card-btns">
@@ -330,7 +281,6 @@
               </div>
             </div>
             @endforeach
-            {{ $clinics->links() }}
 
           </div>
         </div>

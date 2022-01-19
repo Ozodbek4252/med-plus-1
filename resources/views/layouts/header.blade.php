@@ -21,10 +21,10 @@
                 <a class="nav-link" href="about.html"> About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="departments.html">Departments</a>
+                <a class="nav-link" href="{{route('doctors')}}">Doctors</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('user.clinics') }}">Clinics</a>
+                <a class="nav-link" href="{{ route('clinics') }}">Clinics</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
@@ -46,12 +46,12 @@
                       
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{route('user.profile')}}">Account</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="{{ route('user.logout') }}"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('user.logout') }}" method="get" class="d-none">
                             @csrf
                         </form>
                       </div>

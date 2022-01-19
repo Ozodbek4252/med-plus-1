@@ -65,8 +65,8 @@
               <a class="" href="about.html">
                 About
               </a>
-              <a class="" href="departments.html">
-                Departments
+              <a class="" href="{{route('doctors')}}">
+              Doctors
               </a>
               <a class="" href="{{url('/clinics')}}">
                 Clinics

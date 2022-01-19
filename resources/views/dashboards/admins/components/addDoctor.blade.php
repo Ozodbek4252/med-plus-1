@@ -105,7 +105,7 @@
                       <input name="phone" type="text" placeholder="Phone" class="form-control" data-mask="+999 99 999 99 99" placeholder="">
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Profile Image</label>
                     <div class="col-sm-10" style="display: flex;">
@@ -160,7 +160,7 @@
                         <select name="clinic" class="select2_demo_3 form-control">
                           <option></option>
                           @foreach($clinic as $clinic)
-                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                          <option value="{{$clinic->id}}">{{$clinic->name}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -176,18 +176,9 @@
                             <div class="ibox-content">
                               <!-- <form id="form" action="#" class="wizard-big"> -->
                               <select name="speciality[]" class="form-control dual_select" multiple>
-                                <option value="United States">United States</option>
-                                <option value="United Kingdom">United Kingdom</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Austria">Austria</option>
-                                <option value="Bahamas">Bahamas</option>
-                                <option value="Barbados">Barbados</option>
-                                <option value="Belgium">Belgium</option>
-                                <option value="Bermuda">Bermuda</option>
-                                <option value="Brazil">Brazil</option>
-                                <option value="Bulgaria">Bulgaria</option>
-                                <option value="Cameroon">Cameroon</option>
-                                <option value="Canada">Canada</option>
+                                @foreach($specialities as $specialities)
+                                <option value="{{$specialities->speciality_id}}">{{$specialities->name}}</option>
+                                @endforeach
                               </select>
                               <!-- </form> -->
                             </div>
@@ -423,8 +414,8 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+  <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 
 
   <!-- Mainly scripts -->

@@ -128,7 +128,7 @@
                             <li><a href="{{route('admin.users')}}">Users</a></li>
                             <li><a href="{{route('admin.clinics')}}">Clinics</a></li>
                             <li><a href="{{route('admin.doctors')}}">Doctors</a></li>
-                            <li><a href="jq_grid.html">jqGrid</a></li>
+                            <li><a href="{{route('admin.tab')}}">Tab</a></li>
                         </ul>
                     </li>
                 </ul>

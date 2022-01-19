@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\models\Clinic;
 
 class ClinicLink extends Model
 {
@@ -16,4 +17,9 @@ class ClinicLink extends Model
         'insta',
         'fb'
     ];
+
+    public function clinic()
+    {
+        return $this->hasOne(Clinic::class);
+    }
 }

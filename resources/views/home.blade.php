@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  @include("dashboards.users.layouts.css")
+  @include("layouts.css")
 </head>
 
 <body>
@@ -13,9 +13,9 @@
       <img src="images/hero-bg.png" alt="">
     </div>
 
-    @include("dashboards.users.layouts.header")
+    @include("layouts.header")
 
-    @include("dashboards.users.layouts.slider")
+    @include("layouts.slider")
 
   </div>
 
@@ -396,9 +396,9 @@
   <!-- end client section -->
 
 
-  @include('dashboards.users.layouts.footer')
+  @include('layouts.footer')
 
-  @include("dashboards.users.layouts.script")
+  @include("layouts.script")
 </body>
 
 </html>

@@ -323,5 +323,58 @@
 	color: #fff;
 }
 
+.card-full_name {
+	font-weight: 800;
+	font-size: 22px;
+}
+
+.card-speciality {
+	font-size: 16px;
+	margin-bottom: 8px;
+	color: #009EC5;
+	font-weight:600;
+}
+
+.card-expreience {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight:600;
+}
+
+.card-cilinic span {
+	width:22px;
+	height:22px;
+	color: #009EC5;
+	margin-right: 8px;
+}
+
+.card-cilinic {
+	font-size:16px;
+	font-weight:bold;
+	margin-bottom: 16px;
+}
+
+.card-address-doctor .fa-map-marker-alt {
+	color: #009EC5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

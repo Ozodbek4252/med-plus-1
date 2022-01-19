@@ -9,8 +9,11 @@ use App\Models\Doctor;
 use App\Models\ClinicLink;
 use App\Models\ClinicWorkDay;
 use App\Models\ClinicAddress;
+use App\Models\Speciality;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -46,6 +49,16 @@ class AdminController extends Controller
   {
     $data = User::find($id);
     return view('dashboards.admins.components.addClinic', compact("data"));
+  }
+
+  public function logout()
+  {
+    dd(Auth::user());
+    Session::flush();
+
+    Auth::logout();
+
+    return view('home');
   }
 
   function addClinicSave(Request $request, $id)
@@ -176,7 +189,8 @@ class AdminController extends Controller
   public function addDoctor()
   {
     $clinic = Clinic::all();
-    return view('dashboards.admins.components.addDoctor', compact("clinic"));
+    $specialities = Speciality::all();
+    return view('dashboards.admins.components.addDoctor', compact("clinic", "specialities"));
   }
 
   public function addDoctorSave(Request $req)
@@ -253,5 +267,17 @@ class AdminController extends Controller
     $data = doctor::find($id);
 
     return view('dashboards.admins.components.editDoctor', compact("data"));
+  }
+
+
+
+
+
+
+
+
+  public function tab()
+  {
+    return view('dashboards.admins.components.tab');
   }
 }

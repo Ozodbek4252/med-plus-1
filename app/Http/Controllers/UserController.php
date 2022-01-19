@@ -6,12 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
   function index()
   {
     return view('dashboards.users.index');
+  }
+
+  public function logout()
+  {
+    Session::flush();
+
+    Auth::logout();
+
+    return redirect()->route('home');
   }
 
   function profile()
@@ -57,12 +67,12 @@ class UserController extends Controller
   function clinics()
   {
     $clinic = DB::table('clinics')
-          ->join('clinic_addresses', 'clinics.address', 'clinic_addresses.id')
-          ->join('users', 'clinics.user_id', 'users.id')
-          ->join('clinic_work_days', 'clinics.workday', 'clinic_work_days.id')
-          ->join('clinic_links', 'clinics.link', 'clinic_links.id')
-          ->select('clinics.*', 'clinic_addresses.*', 'users.first_name', 'users.last_name', 'clinic_work_days.*', 'clinic_links.*')
-          ->get();
+      ->join('clinic_addresses', 'clinics.address', 'clinic_addresses.id')
+      ->join('users', 'clinics.user_id', 'users.id')
+      ->join('clinic_work_days', 'clinics.workday', 'clinic_work_days.id')
+      ->join('clinic_links', 'clinics.link', 'clinic_links.id')
+      ->select('clinics.*', 'clinic_addresses.*', 'users.first_name', 'users.last_name', 'clinic_work_days.*', 'clinic_links.*')
+      ->get();
 
     return view('dashboards.users.components.clinics', compact("clinic"));
   }
