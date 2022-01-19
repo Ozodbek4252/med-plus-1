@@ -73,7 +73,12 @@ class LoginController extends Controller
       'password' => 'required'
     ]);
 
+<<<<<<< HEAD
     if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2) { {
+=======
+    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2 ) {
+      {
+>>>>>>> 06729594bc6c827495c4edf33ef7caf0faf6e2e7
         return redirect()->route('user.dashboard');
       }
     } else {

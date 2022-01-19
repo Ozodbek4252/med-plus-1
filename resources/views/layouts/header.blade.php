@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <!-- header section strats -->
     <header class="header_section">
       <div class="container">
@@ -77,3 +78,5 @@
 
     </header>
     <!-- end header section -->
+=======
+>>>>>>> 06729594bc6c827495c4edf33ef7caf0faf6e2e7
