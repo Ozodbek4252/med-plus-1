@@ -58,7 +58,6 @@ class LoginController extends Controller
 
     if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2 ) {
       {
-        dd('user');
         return redirect()->route('user.dashboard');
       }
     } else {
