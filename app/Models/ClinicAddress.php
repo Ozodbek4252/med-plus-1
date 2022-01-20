@@ -20,6 +20,6 @@ class ClinicAddress extends Model
 
     public function clinic()
     {
-        return $this->hasOne(Clinic::class);
+        // return $this->hasOne(Clinic::class, 'address');
     }
 }

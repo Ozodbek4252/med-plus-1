@@ -8,6 +8,7 @@ use App\models\ClinicAddress;
 use App\models\ClinicLink;
 use App\models\ClinicWorkDay;
 use App\models\Doctor;
+use App\models\User;
 
 class Clinic extends Model
 {
@@ -30,9 +31,14 @@ class Clinic extends Model
         return $this->hasOne(ClinicAddress::class, 'clinic_id', 'address');
     }
 
-    public function clinicLink()
+    public function owner()
     {
-        return $this->hasOne(ClinicLink::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function link()
+    {
+        return $this->hasOne(Link::class, 'clinic_id', 'link');
     }
 
     public function clinicWorkDay()
