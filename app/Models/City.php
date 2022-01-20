@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Speciality extends Model
+class City extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name_ru',
-        'name_uz',
+        'state_id',
+        'city_uz',
+        'city_ru',
     ];
-
-    public function doctor()
-    {
-        // return $this->belongsTo(Doctor::class);
-    }
 }

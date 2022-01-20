@@ -1,4 +1,3 @@
-<<<<<<< HEAD
     <!-- header section strats -->
     <header class="header_section">
       <div class="container">
@@ -38,36 +37,35 @@
 
 
               @if (Route::has('login'))
-                @auth
-                  <li class="nav-item">
-                    <div class="dropdown show">
-                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{Auth::user()->first_name}}
-                      </a>
-                      
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('user.profile')}}">Account</a>
-                        <a class="dropdown-item" href="{{ route('user.logout') }}"
-                            onclick="event.preventDefault();
+              @auth
+              <li class="nav-item">
+                <div class="dropdown show">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{Auth::user()->first_name}}
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{{route('user.profile')}}">Account</a>
+                    <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('user.logout') }}" method="get" class="d-none">
-                            @csrf
-                        </form>
-                      </div>
-                    </div>
-                  </li>
+                      {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('user.logout') }}" method="get" class="d-none">
+                      @csrf
+                    </form>
+                  </div>
+                </div>
+              </li>
 
-                @else
+              @else
 
-                  <li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
+              <li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
 
-                  @if (Route::has('register'))
-                    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link text-sm text-gray-700 dark:text-gray-500 underline">Register</a></li>
-                  @endif
+              @if (Route::has('register'))
+              <li class="nav-item"><a href="{{ route('register') }}" class="nav-link text-sm text-gray-700 dark:text-gray-500 underline">Register</a></li>
+              @endif
 
-                @endauth
+              @endauth
               @endif
 
 
@@ -78,5 +76,3 @@
 
     </header>
     <!-- end header section -->
-=======
->>>>>>> 06729594bc6c827495c4edf33ef7caf0faf6e2e7

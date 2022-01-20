@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\models\Clinic;
 
-class ClinicLink extends Model
+class Link extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'clinic_id',
+        'doctor_id',
         'email',
         'tg',
         'insta',
@@ -20,6 +20,6 @@ class ClinicLink extends Model
 
     public function clinic()
     {
-        return $this->hasOne(Clinic::class);
+        // return $this->hasOne(Clinic::class);
     }
 }

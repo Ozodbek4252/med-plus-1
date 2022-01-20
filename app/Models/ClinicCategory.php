@@ -10,6 +10,7 @@ class ClinicCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category',
+        'category_uz',
+        'category_ru',
     ];
 }

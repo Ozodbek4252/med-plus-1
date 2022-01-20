@@ -66,7 +66,7 @@
       </div>
       <div class="wrapper wrapper-content animated fadeInRight">
 
-        <form method="post" action="{{ route('addClinicSave', $data->id) }}">
+        <form method="post" action="{{ route('addClinicSave') }}">
           @csrf
 
           <div class="clients-list">
@@ -97,8 +97,8 @@
 
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <label for="name">Name</label>
-                                    <input style="background-color: #99999915;" name="name" type="text" class="form-control" id="name" placeholder="Clinic Name" required>
+                                    <label for="name_uz">Name</label>
+                                    <input style="background-color: #99999915;" name="name_uz" type="text" class="form-control" id="name_uz" placeholder="Clinic Name" required>
                                   </div>
 
                                   <div class="col-md-6">
@@ -121,41 +121,38 @@
 
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <label>
+                                    <label for="owner">
                                       Owner
                                     </label>
-                                    <select class="select2_demo_1 form-control">
+                                    <select name="owner" id="owner"class="select2_demo_1 form-control">
                                       <option></option>
-                                      <option value="Jill">Jill</option>
-                                      <option value="Jim">Jim</option>
-                                      <option value="Ary">Ary</option>
-                                      <option value="Henry">Henry</option>
-                                      <option value="House">House</option>
+                                      @foreach($owner as $owner)
+                                      <option value="{{$owner->id}}">{{$owner->last_name}} {{$owner->first_name}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 
                                   <div class="col-md-4">
-                                    <label>
+                                    <label for="type">
                                       Type
                                     </label>
-                                    <select class="select2_demo_2 form-control">
+                                    <select name="type" id="type" class="select2_demo_2 form-control">
                                       <option></option>
-                                      <option value="Private">Private</option>
-                                      <option value="Public">Public</option>
+                                      @foreach($clinicType as $clinicType)
+                                      <option value="{{$clinicType->id}}">{{$clinicType->type_uz}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 
                                   <div class="col-md-4">
-                                    <label>
+                                    <label for="category">
                                       Category
                                     </label>
-                                    <select class="select2_demo_3 form-control">
+                                    <select name="category" id="category" class="select2_demo_3 form-control">
                                       <option></option>
-                                      <option value="Cat1">Cat1</option>
-                                      <option value="Cat2">Cat2</option>
-                                      <option value="Cat3">Cat3</option>
-                                      <option value="Cat4">Cat4</option>
-                                      <option value="Cat5">Cat5</option>
+                                      @foreach($clinicCategory as $clinicCategory)
+                                      <option value="{{$clinicCategory->id}}">{{$clinicCategory->category_uz}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                 </div>
@@ -174,47 +171,37 @@
 
                                 <div class="row" style="margin-bottom: 15px;">
                                   <div class="col-md-6">
-                                    <label for="inputState">State</label>
-                                    <select style="background-color: #99999915;" name="state" id="inputState" class="form-control" required="">
+                                    <label for="state_uz">State</label>
+                                    <select style="background-color: #99999915;" name="state_uz" id="state_uz" class="form-control" required="">
                                       <option>Choose...</option>
-                                      <option value="Toshkent">Toshkent</option>
-                                      <option value="Farg'ona">Farg'ona</option>
-                                      <option value="Andijon">Andijon</option>
-                                      <option value="Namangan">Namangan</option>
-                                      <option value="Sirdaryo">Sirdaryo</option>
-                                      <option value="Samarqand">Samarqand</option>
-                                      <option value="Jizzax">Jizzax</option>
-                                      <option value="Buxoro">Buxoro</option>
-                                      <option value="Navoiy">Navoiy</option>
-                                      <option value="Qashqadaryo">Qashqadaryo</option>
-                                      <option value="Surxondaryo">Surxondaryo</option>
-                                      <option value="Xorazm">Xorazm</option>
-                                      <option value="Qoraqolpog'iston">Qoraqolpog'iston</option>
+                                      @foreach($states as $state)
+                                      <option value="{{$state->id}}">{{$state->state_uz}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 
                                   <div class="col-md-6">
-                                    <label for="inputCity">City</label>
-                                    <input style="background-color: #99999915;" name="city" type="text" placeholder="Shahar / Tuman" class="form-control" id="inputCity" required>
+                                    <label for="city_uz">City</label>
+                                    <input style="background-color: #99999915;" name="city_uz" type="text" placeholder="Shahar / Tuman" class="form-control" id="city_uz" required>
                                   </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 15px;">
                                   <div class="col-md-6">
-                                    <label for="inputAddress">Address (optional)</label>
-                                    <input style="background-color: #99999915;" name="street" type="text" class="form-control" id="inputAddress" placeholder="Ko'cha">
+                                    <label for="street_uz">Address (optional)</label>
+                                    <input style="background-color: #99999915;" name="street_uz" type="text" class="form-control" id="street_uz" placeholder="Ko'cha">
                                   </div>
 
                                   <div class="col-md-6">
-                                    <label for="inputAddress2">Address 2 (optional)</label>
-                                    <input style="background-color: #99999915;" name="apartment" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                    <label for="apartment_uz">Address 2 (optional)</label>
+                                    <input style="background-color: #99999915;" name="apartment_uz" type="text" class="form-control" id="apartment_uz" placeholder="Apartment, studio, or floor">
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <label for="inputAddress">Moljal (optional)</label>
-                                    <input style="background-color: #99999915;" name="street" type="text" class="form-control" id="inputAddress" placeholder="">
+                                    <label for="moljal_uz">Moljal (optional)</label>
+                                    <input style="background-color: #99999915;" name="moljal_uz" type="text" class="form-control" id="moljal_uz" placeholder="">
                                   </div>
                                 </div>
                               </div>
@@ -232,14 +219,12 @@
 
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <labeL>Ixtissosligi</labeL>
-                                    <select name="speciality[]" class="form-control dual_select" multiple>
+                                    <label for="doctors">Doctors</label>
+                                    <select name="doctors[]" id="doctors" class="form-control dual_select" multiple>
                                       <option></option>
-                                      <option value="Cat1">Cat1</option>
-                                      <option value="Cat2">Cat2</option>
-                                      <option value="Cat3">Cat3</option>
-                                      <option value="Cat4">Cat4</option>
-                                      <option value="Cat5">Cat5</option>
+                                      @foreach($doctors as $doctor)
+                                      <option value="Cat1">{{$doctor->last_name}} {{$doctor->first_name}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                 </div>
@@ -462,13 +447,13 @@
                                 <div class="row">
                                   <div class="row">
                                     <div class="col-md-6">
-                                      <label for="name">Logo</label>
-                                      <input style="background-color: #99999915;" name="name" type="text" class="form-control" id="name" placeholder="Clinic Name" required>
+                                      <label for="logo">Logo</label>
+                                      <input style="background-color: #99999915;" name="logo" type="text" class="form-control" id="logo" placeholder="Clinic Name" required>
                                     </div>
 
                                     <div class="col-md-6">
-                                      <label for="phone">Location</label>
-                                      <input style="background-color: #99999915;" name="phone" data-mask="+999 99 999 99 99" type="text" class="form-control" id="phone" placeholder="+998 98 765 43 21" required>
+                                      <label for="location">Location</label>
+                                      <input style="background-color: #99999915;" name="location" data-mask="+999 99 999 99 99" type="text" class="form-control" id="location" placeholder="+998 98 765 43 21" required>
                                     </div>
                                   </div>
                                 </div>
@@ -478,7 +463,7 @@
                           </div>
                         </div>
 
-                        <!-- Comment -->
+                        <!-- Info -->
                         <div class="row">
                           <div class="col-lg-12">
 
@@ -488,7 +473,7 @@
                                 <div class="row">
                                   <div class="col-md-12" style="display: flex; flex-direction: column;">
                                     <label for="info">Info</label>
-                                    <textarea name="info" data-provide="markdown" placeholder="Info..." rows="10"></textarea>
+                                    <textarea name="info" id="info" data-provide="markdown" class="form-control" placeholder="Info..." rows="10"></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -529,7 +514,7 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
 
-                        <!-- Name, Phone Ru -->
+                        <!-- Name Ru -->
                         <div class="row">
                           <div class="col-lg-12">
 
@@ -538,8 +523,8 @@
 
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <label for="name">Имя</label>
-                                    <input style="background-color: #99999915;" name="name" type="text" class="form-control" id="name" placeholder="Название клиники" required>
+                                    <label for="name_ru">Имя</label>
+                                    <input name="name_ru" id="name_ru" style="background-color: #99999915;" type="text" class="form-control" placeholder="Название клиники" required>
                                   </div>
                                 </div>
                               </div>
@@ -557,47 +542,37 @@
 
                                 <div class="row" style="margin-bottom: 15px;">
                                   <div class="col-md-6">
-                                    <label for="inputState">Облас</label>
-                                    <select style="background-color: #99999915;" name="state" id="inputState" class="form-control" required="">
+                                    <label for="state_ru">Облас</label>
+                                    <select name="state_ru" id="state_ru" style="background-color: #99999915;" class="form-control" required="">
                                       <option>Выбирать...</option>
-                                      <option value="Toshkent">Toshkent</option>
-                                      <option value="Farg'ona">Farg'ona</option>
-                                      <option value="Andijon">Andijon</option>
-                                      <option value="Namangan">Namangan</option>
-                                      <option value="Sirdaryo">Sirdaryo</option>
-                                      <option value="Samarqand">Samarqand</option>
-                                      <option value="Jizzax">Jizzax</option>
-                                      <option value="Buxoro">Buxoro</option>
-                                      <option value="Navoiy">Navoiy</option>
-                                      <option value="Qashqadaryo">Qashqadaryo</option>
-                                      <option value="Surxondaryo">Surxondaryo</option>
-                                      <option value="Xorazm">Xorazm</option>
-                                      <option value="Qoraqolpog'iston">Qoraqolpog'iston</option>
+                                      @foreach($states as $state)
+                                      <option value="{{$state->id}}">{{$state->state_ru}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 
                                   <div class="col-md-6">
-                                    <label for="inputCity">Город</label>
-                                    <input style="background-color: #99999915;" name="city" type="text" placeholder="Город / Район" class="form-control" id="inputCity" required>
+                                    <label for="city_ru">Город</label>
+                                    <input name="city_ru" id="city_ru" style="background-color: #99999915;" type="text" placeholder="Город / Район" class="form-control" required>
                                   </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 15px;">
                                   <div class="col-md-6">
-                                    <label for="inputAddress">Адрес (по желанию)</label>
-                                    <input style="background-color: #99999915;" name="street" type="text" class="form-control" id="inputAddress" placeholder="улица">
+                                    <label for="street_ru">Адрес (по желанию)</label>
+                                    <input name="street_ru" id="street_ru" style="background-color: #99999915;" type="text" class="form-control" placeholder="улица">
                                   </div>
 
                                   <div class="col-md-6">
-                                    <label for="inputAddress2">Адрес 2 (по желанию)</label>
-                                    <input style="background-color: #99999915;" name="apartment" type="text" class="form-control" id="inputAddress2" placeholder="Квартира, студия, or этаж">
+                                    <label for="apartment_ru">Адрес 2 (по желанию)</label>
+                                    <input name="apartment_ru" id="apartment_ru" style="background-color: #99999915;" type="text" class="form-control" placeholder="Квартира, студия, or этаж">
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <label for="inputAddress">Ориентр (по желанию)</label>
-                                    <input style="background-color: #99999915;" name="street" type="text" class="form-control" id="inputAddress" placeholder="">
+                                    <label for="moljal_ru">Ориентр (по желанию)</label>
+                                    <input id="moljal_ru" name="moljal_ru" style="background-color: #99999915;" type="text" class="form-control" placeholder="">
                                   </div>
                                 </div>
                               </div>
@@ -606,7 +581,7 @@
                           </div>
                         </div>
 
-                        <!-- Comment Ru -->
+                        <!-- Info Ru -->
                         <div class="row">
                           <div class="col-lg-12">
 
@@ -615,8 +590,8 @@
 
                                 <div class="row">
                                   <div class="col-md-12" style="display: flex; flex-direction: column;">
-                                    <label for="name">Информация</label>
-                                    <textarea name="comment" data-provide="markdown" class="form-control" placeholder="Информация..." rows="10"></textarea>
+                                    <label for="info_ru">Информация</label>
+                                    <textarea id="info_ru" name="info_ru" data-provide="markdown" class="form-control" placeholder="Информация..." rows="10"></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -630,6 +605,8 @@
                   </div>
                 </div>
               </div>
+
+
             </div>
           </div>
 

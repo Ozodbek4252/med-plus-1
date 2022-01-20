@@ -46,6 +46,11 @@
         <div class="col-lg-2">
         </div>
       </div>
+
+      <div class="addDoctor" style="padding: 30px 10px; padding-bottom: 10px;">
+        <a href="{{ route('admin.addClinic') }}"><button type="button" class="btn btn-w-m btn-primary">Add Clinic</button></a>
+      </div>
+
       <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
           <div class="col-lg-12">
@@ -88,51 +93,37 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($data as $data)
+                      @foreach($clinics as $clinic)
                       <tr class="gradeX">
-                        <td>{{$data->name}}</td>
-                        <td>{{$data->first_name}} {{$data->last_name}}</td>
-                        <td>{{$data->phone}}</td>
-                        <td>{{$data->apartment}} {{$data->street}} {{$data->city}} {{$data->state}}</td>
+                        <td>{{$clinic->owner->last_name}} {{$clinic->owner->first_name}}</td>
+                        <td>{{ $clinic->name }}</td>
+                        <td>{{ $clinic->phone }}</td>
+                        <td>{{ optional($clinic->clinicAddress)->city }} {{ optional($clinic->clinicAddress)->state }}</td>
                         <td class="center">
                           <ul style="padding: 0">
-                            @if($data->mon != null)
-                              <li style="list-style-type: none;">{{$data->mon}}</li>
-                            @endif
-                            @if($data->tue != null)
-                            <li style="list-style-type: none;">{{$data->tue}}</li>
-                            @endif
-                            @if($data->wed != null)
-                            <li style="list-style-type: none;">{{$data->wed}}</li>
-                            @endif
-                            @if($data->thu != null)
-                            <li style="list-style-type: none;">{{$data->thu}}</li>
-                            @endif
-                            @if($data->fri != null)
-                            <li style="list-style-type: none;">{{$data->fri}}</li>
-                            @endif
-                            @if($data->sat != null)
-                            <li style="list-style-type: none;">{{$data->sat}}</li>
-                            @endif
-                            @if($data->sun != null)
-                            <li style="list-style-type: none;">{{$data->sun}}</li>
-                            @endif
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
                           </ul>
                         </td>
                         <td class="center">
                           <ul style="padding: 0">
-                            <li style="list-style-type: none;">{{$data->email}}</li>
-                            <li style="list-style-type: none;">{{$data->tg}}</li>
-                            <li style="list-style-type: none;">{{$data->fb}}</li>
-                            <li style="list-style-type: none;">{{$data->insta}}</li>
-                          </ul>  
+                            <li style="list-style-type: none;">email</li>
+                            <li style="list-style-type: none;">tg</li>
+                            <li style="list-style-type: none;">fb</li>
+                            <li style="list-style-type: none;">insta</li>
+                          </ul>
                         </td>
-                        <td class="center">{{$data->logo}}</td>
-                        <td class="center">{{$data->location}}</td>
-                        <td class="center"><a href="{{route('admin.editClinic', $data->id)}}">Edit</a></td>
+                        <td class="center">logo</td>
+                        <td class="center">location</td>
+                        <td class="center"><a href="">Edit</a></td>
                       </tr>
                       @endforeach
-                      </tfoot>
+                    </tbody>
                   </table>
                 </div>
               </div>

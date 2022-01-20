@@ -32,6 +32,7 @@ class CreateClinicTypesTable extends Migration
             ]
         ]);
     }
+    
 
     /**
      * Reverse the migrations.

@@ -34,8 +34,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
   Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
   Route::get('users', [AdminController::class, 'users'])->name('admin.users');
   Route::get('clinics', [AdminController::class, 'clinics'])->name('admin.clinics');
-  Route::get('addClinic/{id}', [AdminController::class, 'addClinic'])->name('admin.addClinic');
-  Route::post('addClinicSave/{id}', [AdminController::class, 'addClinicSave'])->name('addClinicSave');
+  Route::get('addClinic', [AdminController::class, 'addClinic'])->name('admin.addClinic');
+  Route::post('addClinicSave', [AdminController::class, 'addClinicSave'])->name('addClinicSave');
   Route::get('editClinic/{id}', [AdminController::class, 'editClinic'])->name('admin.editClinic');
   Route::get('doctors', [AdminController::class, 'doctors'])->name('admin.doctors');
   Route::get('addDoctor', [AdminController::class, 'addDoctor'])->name('admin.addDoctor');

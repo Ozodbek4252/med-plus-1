@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\Clinic;
+use App\Models\ClinicType;
+use App\Models\ClinicCategory;
 use App\Models\Doctor;
-use App\Models\ClinicLink;
-use App\Models\ClinicWorkDay;
+use App\Models\Link;
+use App\Models\WorkingDay;
 use App\Models\ClinicAddress;
 use App\Models\Speciality;
+use App\Models\State;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
@@ -45,10 +50,24 @@ class AdminController extends Controller
     // return view("admin.users", compact("data", "num", "address", "users"));
   }
 
-  function addClinic($id)
+  function addClinic()
   {
-    $data = User::find($id);
-    return view('dashboards.admins.components.addClinic', compact("data"));
+    $clinic = Clinic::all();
+    $address = ClinicAddress::all();
+    // $clinic[0]->clinicAddress;
+    // $address[0]->clinic;
+    
+    
+    
+    $owner = User::all();
+    $clinicCategory = ClinicCategory::all();
+    $clinicType = ClinicType::all();
+    $doctors = Doctor::all();
+    $states = State::all();
+
+
+    return view('dashboards.admins.components.addClinic', 
+                compact('owner', 'clinicCategory', 'clinicType', 'doctors', 'states'));
   }
 
   public function logout()
@@ -154,15 +173,36 @@ class AdminController extends Controller
 
   public function clinics()
   {
-    $data = DB::table('clinics')
-      ->join('clinic_addresses', 'clinics.address', 'clinic_addresses.id')
-      ->join('users', 'clinics.user_id', 'users.id')
-      ->join('clinic_work_days', 'clinics.workday', 'clinic_work_days.id')
-      ->join('clinic_links', 'clinics.link', 'clinic_links.id')
-      ->select('clinics.*', 'clinic_addresses.*', 'users.first_name', 'users.last_name', 'clinic_work_days.*', 'clinic_links.*')
-      ->get();
 
-    return view("dashboards.admins.components.clinicTable", compact("data"));
+    $clinics = Clinic::all();
+    $owner = User::all();
+    // change to Address which is new model
+    $clinicAddress = ClinicAddress::all();
+    $workingDay = WorkingDay::all();
+    $link = Link::all();
+    foreach($clinicAddress as $clinicAddress){
+      if($clinicAddress->state==null) {
+        $clinicAddress->state = 0;
+      }
+      if($clinicAddress->city==null){
+        $clinicAddress->city = 0;
+      }
+      if($clinicAddress->street==null){
+        $clinicAddress->street = 0;
+      }
+      if($clinicAddress->apartment==null){
+        $clinicAddress->apartment = 0;
+      }
+    }
+
+    // dd($clinics[0]->clinicAddress->street);
+    
+    // dd($clinics[0]->owner);
+    // dd($clinic[0]->link);
+    // dd($clinic[0]->clinicAddress);
+
+    return view("dashboards.admins.components.clinicTable", 
+              compact("clinics", "clinicAddress", "workingDay", "link"));
   }
 
   public function editClinic(Request $request, $id)
@@ -179,10 +219,10 @@ class AdminController extends Controller
   public function doctors()
   {
     $data = Doctor::all();
-    $doctor = DB::table('doctors')
-      ->join('clinic_work_days', 'doctors.workDays', 'clinic_work_days.id')
-      ->select('doctors.*', 'clinic_work_days.*')
-      ->get();
+    // $doctor = DB::table('doctors')
+    //   ->join('clinic_work_days', 'doctors.workDays', 'clinic_work_days.id')
+    //   ->select('doctors.*', 'clinic_work_days.*')
+    //   ->get();
     return view('dashboards.admins.components.doctorsTable', compact("data"));
   }
 

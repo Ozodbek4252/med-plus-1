@@ -11,16 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-  /*
-  |--------------------------------------------------------------------------
-  | Login Controller
-  |--------------------------------------------------------------------------
-  |
-  | This controller handles authenticating users for the application and
-  | redirecting them to your home screen. The controller uses a trait
-  | to conveniently provide its functionality to your applications.
-  |
-  */
   // use AuthenticatesUsers;
 
 
@@ -73,12 +63,8 @@ class LoginController extends Controller
       'password' => 'required'
     ]);
 
-<<<<<<< HEAD
-    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2) { {
-=======
-    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2 ) {
-      {
->>>>>>> 06729594bc6c827495c4edf33ef7caf0faf6e2e7
+    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2) {
+      if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))  && auth()->user()->role == 2) {
         return redirect()->route('user.dashboard');
       }
     } else {
