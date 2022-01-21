@@ -223,20 +223,37 @@ class AdminController extends Controller
   public function addDoctorSave(Request $req)
   {
     $doctor = new Doctor;
-    $doctor->first_name = $req->get('first_name');
-    $doctor->last_name = $req->get('last_name');
+    $doctor->first_name_ru = $req->get('first_name_ru');
+    if ($req->get('first_name_uz')) {
+      $doctor->first_name_uz = $req->get('first_name_uz');
+    }
+    $doctor->last_name_ru = $req->get('last_name_ru');
+    if ($req->get('last_name_uz')) {
+      $doctor->last_name_uz = $req->get('last_name_uz');
+    }
+    if ($req->get('summary_ru')) {
+      $doctor->summary_ru = $req->get('summary_ru');
+    }
+    if ($req->get('summary_uz')) {
+      $doctor->summary_uz = $req->get('summary_uz');
+    }
     if ($req->get('email')) {
       $doctor->email = $req->get('email');
     }
     if ($req->get('phone')) {
       $doctor->phone = $req->get('phone');
     }
+    if ($req->get('date_of_birth')) {
+      $doctor->date_of_birth = $req->get('date_of_birth');
+    }
+    if ($req->get('experience')) {
+      $doctor->experience = $req->get('experience');
+    }
+    
 
-    dd($req->imagee);
-    // dd($req->imagee->extension());
+    // dd($req->image->extension());
     // image
 
-    $doctor->date_of_birth = $req->get('date_of_birth');
     $doctor->clinic = intval($req->clinic);
 
     if ($req->speciality) {
