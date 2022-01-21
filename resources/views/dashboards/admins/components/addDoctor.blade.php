@@ -62,7 +62,7 @@
       </div>
 
       <div class="wrapper wrapper-content animated fadeInRight">
-        <form method="post" action="{{ route('addClinicSave') }}">
+        <form method="post" action="{{ route('admin.addDoctor') }}">
           @csrf
 
           <div class="clients-list">
@@ -84,11 +84,9 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
 
-
                         <!-- Full Name Ru -->
                         <div class="row">
                           <div class="col-lg-12">
-
                             <div class="ibox">
                               <div class="ibox-content">
 
@@ -105,70 +103,319 @@
                                 </div>
                               </div>
                             </div>
-
                           </div>
                         </div>
-
 
                         <!-- Email, Phone -->
                         <div class="row">
                           <div class="col-lg-12">
-
                             <div class="ibox">
                               <div class="ibox-content">
 
                                 <div class="row">
                                   <div class="col-md-6">
                                     <label for="email">Адрес электронной почты</label>
-                                    <input style="background-color: #99999915;" name="email" type="email" class="form-control" id="email" placeholder="Адрес электронной почты" required>
+                                    <input style="background-color: #99999915;" name="email" type="email" class="form-control" id="email" placeholder="Адрес электронной почты">
                                   </div>
 
                                   <div class="col-md-6">
                                     <label for="phone">Телефонный номер</label>
-                                    <input style="background-color: #99999915;" name="phone" data-mask="+999 99 999 99 99" type="text" class="form-control" id="phone" placeholder="+998 99 999 99 99" required>
+                                    <input style="background-color: #99999915;" name="phone" data-mask="+999 99 999 99 99" type="text" class="form-control" id="phone" placeholder="+998 99 999 99 99">
                                   </div>
                                 </div>
                               </div>
                             </div>
-
                           </div>
                         </div>
-
 
                         <!-- Date_of_birth, Image -->
                         <div class="row">
                           <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="date_of_birth">Дата рождения</label>
+                                    <div class="input-group date">
+                                      <span style="background-color: #99999915;" class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="date_of_birth" id="date_of_birth" type="text" class="form-control" value="10/11/2013" />
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="image">Фото</label>
+                                    <input name="image" type="file" class="form-control" id="image">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
+                        <!-- Specialities -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+
+                                $specialities
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="speciality">Специальности</label>
+                                    <select id="speciality" name="speciality[]" class="form-control dual_select" multiple>
+                                      @foreach($specialities as $speciality)
+                                      <option value="{{$speciality->id}}">{{$speciality->name_ru}}</option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Clinics -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="clinics">Клиники</label>
+                                    <select id="clinics" name="clinics[]" class="form-control dual_select" multiple>
+                                      <option value="">dsfsd</option>
+                                      <option value="">dsfsahjkhjsd</option>
+                                      <option value="">dsfhsd</option>
+                                      <option value="">dsffwesd</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Experience -->
+                        <div class="row">
+                          <div class="col-lg-12">
                             <div class="ibox">
                               <div class="ibox-content">
 
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <label for="date_of_birth">Дата рождения</label>
-                                    <div class="input-group date">
-                                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="date_of_birth" id="date_of_birth" type="text" class="form-control" value="10/11/2013" />
-                                    </div>
-                                  </div>
-
-                                  <div class="col-md-6">
-                                    <label for="phone">Телефонный номер</label>
-                                    <input style="background-color: #99999915;" name="phone" data-mask="+999 99 999 99 99" type="text" class="form-control" id="phone" placeholder="+998 99 999 99 99" required>
+                                    <label for="experience">Опыт</label>
+                                    <input style="background-color: #99999915;" name="experience" type="text" class="form-control" id="experience" placeholder="8 лет">
                                   </div>
                                 </div>
+
                               </div>
                             </div>
-
                           </div>
                         </div>
 
+                        <!-- Clinics -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
 
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="workingDays">Рабочие дни</label>
 
+                                    <table style="margin: 0 15px; width: calc(100% - 30px);" class="table table-dark">
+                                      <tbody>
 
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
 
+                                              <input name="mon" value="check" class="form-check-input moncheck" type="checkbox" id="moncheck">
+                                              <label style="-webkit-touch-callout: none; -webkit-user-select: none;-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" class="form-check-label" for="moncheck">
+                                                Monday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
 
+                                                <input name="monstart" type="time" class="monday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="monend" type="time" class="monday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
 
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
 
+                                              <input name="tue" value="check" class="form-check-input tuecheck" type="checkbox" id="tuecheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none;  user-select: none;" class="form-check-label" for="tuecheck">
+                                                Tuesday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
 
+                                                <input name="tuestart" type="time" class="tuesday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="tueend" type="time" class="tuesday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
+
+                                              <input name="wed" value="check" class="form-check-input wedcheck" type="checkbox" id="wedcheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none; -khtml-user-select:none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="wedcheck">
+                                                Wednesday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
+
+                                                <input name="wedstart" type="time" class="wednesday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="wedend" type="time" class="wednesday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
+
+                                              <input name="thu" value="check" class="form-check-input thucheck" type="checkbox" id="thucheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="thucheck">
+                                                Thursday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
+
+                                                <input name="thustart" type="time" class="thursday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="thuend" type="time" class="thursday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
+
+                                              <input name="fri" value="check" class="form-check-input fricheck" type="checkbox" id="fricheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="fricheck">
+                                                Friday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
+
+                                                <input name="fristart" type="time" class="friday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="friend" type="time" class="friday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
+
+                                              <input name="sat" value="check" class="form-check-input satcheck" type="checkbox" id="satcheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="satcheck">
+                                                Saturday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
+
+                                                <input name="satstart" type="time" class="saturday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="satend" type="time" class="saturday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr>
+                                          <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
+                                            <div class="form-check">
+
+                                              <input name="sun" value="check" class="form-check-input suncheck" type="checkbox" id="suncheck">
+                                              <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="suncheck">
+                                                Sunday
+                                              </label>
+                                            </div>
+                                          </td>
+                                          <td class="form-group col-md-6">
+                                            <div class="form-row" style="display: flex;">
+                                              <div style="padding-right: 10px;">
+
+                                                <input name="sunstart" type="time" class="sunday" disabled>
+                                              </div>
+                                              <div>
+                                                <input name="sunend" type="time" class="sunday" disabled>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                      </tbody>
+                                    </table>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Summary Ru -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+
+                                <div class="row">
+                                  <div class="col-md-12" style="display: flex; flex-direction: column;">
+                                    <label for="summary_ru">Краткое описание</label>
+                                    <textarea name="summary_ru" id="summary_ru" data-provide="markdown" class="form-control" placeholder="Краткое описание..." rows="10"></textarea>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
                       </div>
                     </div>
@@ -182,6 +429,45 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
 
+                        <!-- Full Name Uz -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="first_name_uz">Ism</label>
+                                    <input style="background-color: #99999915;" name="first_name_zu" type="text" class="form-control" id="first_name_uz" placeholder="Ism">
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label for="last_name_uz">Familiya</label>
+                                    <input style="background-color: #99999915;" name="last_name_uz" type="text" class="form-control" id="last_name_uz" placeholder="Familiya">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Summary Ru -->
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="ibox">
+                              <div class="ibox-content">
+
+                                <div class="row">
+                                  <div class="col-md-12" style="display: flex; flex-direction: column;">
+                                    <label for="summary_uz">Summary</label>
+                                    <textarea name="summary_uz" id="summary_uz" data-provide="markdown" class="form-control" placeholder="Summary..." rows="10"></textarea>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -189,329 +475,6 @@
               </div>
             </div>
 
-
-
-            <!-- <div class="row">
-              <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                  <div class="ibox-title">
-                    <h5>
-                      All form elements
-                      <small>With custom checbox and radion elements.</small>
-                    </h5>
-                    <div class="ibox-tools">
-                      <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                      </a>
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                      </a>
-                      <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">Config option 1</a></li>
-                        <li><a href="#">Config option 2</a></li>
-                      </ul>
-                      <a class="close-link">
-                        <i class="fa fa-times"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="ibox-content"> -->
-
-
-            <!-- <form method="post" action="{{route('admin.addDoctor')}}" class="form-horizontal" enctype="multipart/form-data">
-                      @csrf
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Full name</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <input required name="first_name" type="text" placeholder="Ism" class="form-control" style="margin-right: 10px;" />
-                          <input required name="last_name" type="text" placeholder="Familya" class="form-control" />
-                        </div>
-                      </div> -->
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Email / Phone</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <input name="email" type="email" placeholder="Email" class="form-control" style="margin-right: 10px;" />
-                          <input name="phone" type="text" placeholder="Phone" class="form-control" data-mask="+999 99 999 99 99" placeholder="">
-                        </div>
-                      </div> -->
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Profile Image</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                  <div class="row">
-                                    <div class="col-md-6">
-                                      <div class="image-crop">
-                                        <img src="admin/img/doctor1.jpg">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <h4>Preview image</h4>
-                                      <div class="img-preview img-preview-sm"></div>
-                                      <h4>Comon method</h4>
-                                      <p>
-                                        You can upload new image to crop container and easy download new cropped image.
-                                      </p>
-                                      <div class="btn-group">
-                                        <label title="Upload image file" for="inputImage" class="btn btn-primary">
-                                          <input type="file" accept="image/*" name="image" id="inputImage" class="hide">
-                                          Upload new image
-                                        </label>
-                                        <label title="Download image" id="download" class="btn btn-primary">Download</label>
-                                      </div>
-                                      <div class="btn-group">
-                                        <button class="btn btn-white" id="zoomIn" type="button">Zoom In</button>
-                                        <button class="btn btn-white" id="zoomOut" type="button">Zoom Out</button>
-                                        <button class="btn btn-white" id="rotateLeft" type="button">Rotate Left</button>
-                                        <button class="btn btn-white" id="rotateRight" type="button">Rotate Right</button>
-                                        <button class="btn btn-warning" id="setDrag" type="button">New crop</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Details</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="date_of_birth" type="text" class="form-control" value="10/11/2013" />
-                          </div>
-                          <div class="col-md-4">
-                            <select name="clinic" class="select2_demo_3 form-control">
-                              <option></option>
-                              @foreach($clinic as $clinic)
-                              <option value="{{$clinic->id}}">{{$clinic->name}}</option>
-                              @endforeach
-                            </select>
-                          </div>
-                        </div>
-                      </div> -->
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Ixtissosligi</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="ibox">
-                                <div class="ibox-content">
-                                  <select name="speciality[]" class="form-control dual_select" multiple>
-                                    @foreach($specialities as $specialities)
-                                    <option value="{{$specialities->speciality_id}}">{{$specialities->name}}</option>
-                                    @endforeach
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Ish kunlari</label>
-                        <div class="col-sm-10" style="display: flex;">
-                          <table style="margin: 0 15px; width: calc(100% - 30px);" class="table table-dark">
-                            <tbody>
-
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="mon" value="check" class="form-check-input moncheck" type="checkbox" id="moncheck">
-                                    <label style="-webkit-touch-callout: none; -webkit-user-select: none;-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" class="form-check-label" for="moncheck">
-                                      Monday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="monstart" type="time" class="monday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="monend" type="time" class="monday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="tue" value="check" class="form-check-input tuecheck" type="checkbox" id="tuecheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none;  user-select: none;" class="form-check-label" for="tuecheck">
-                                      Tuesday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="tuestart" type="time" class="tuesday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="tueend" type="time" class="tuesday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="wed" value="check" class="form-check-input wedcheck" type="checkbox" id="wedcheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none; -khtml-user-select:none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="wedcheck">
-                                      Wednesday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="wedstart" type="time" class="wednesday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="wedend" type="time" class="wednesday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="thu" value="check" class="form-check-input thucheck" type="checkbox" id="thucheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="thucheck">
-                                      Thursday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="thustart" type="time" class="thursday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="thuend" type="time" class="thursday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="fri" value="check" class="form-check-input fricheck" type="checkbox" id="fricheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="fricheck">
-                                      Friday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="fristart" type="time" class="friday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="friend" type="time" class="friday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="sat" value="check" class="form-check-input satcheck" type="checkbox" id="satcheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="satcheck">
-                                      Saturday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="satstart" type="time" class="saturday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="satend" type="time" class="saturday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="padding-top: 0; padding-bottom: 0; vertical-align: middle;" class="form-group col-md-6">
-                                  <div class="form-check">
-
-                                    <input name="sun" value="check" class="form-check-input suncheck" type="checkbox" id="suncheck">
-                                    <label style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;" class="form-check-label" for="suncheck">
-                                      Sunday
-                                    </label>
-                                  </div>
-                                </td>
-                                <td class="form-group col-md-6">
-                                  <div class="form-row" style="display: flex;">
-                                    <div style="padding-right: 10px;">
-
-                                      <input name="sunstart" type="time" class="sunday" disabled>
-                                    </div>
-                                    <div>
-                                      <input name="sunend" type="time" class="sunday" disabled>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div> -->
-
-
-            <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">Ish tajribasi</label>
-                        <div class="col-sm-2" style="display: flex;">
-                          <input name="experience" type="text" placeholder="Misol: 6 yil" class="form-control" style="margin-right: 10px;" />
-                        </div>
-                      </div>
-
-
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Summary</label>
-                        <div class="col-sm-2" style="display: flex;">
-                          <textarea id="summary" name="summary" rows="8" cols="60" style="width: 300px;">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-                      </textarea>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="col-sm-2" style="display: flex;">
-                          <button type="submit" class="btn btn-w-m btn-primary" style="margin-left: 180px;">Save</button>
-                        </div>
-                      </div>
-                    </form> -->
-
-
-            <!-- </div>
-
-                </div>
-              </div>
-            </div> -->
 
             <button type="submit" class="btn btn-primary" style="margin: 10px 15px;">Save</button>
         </form>
