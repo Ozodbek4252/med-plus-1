@@ -82,6 +82,7 @@
                   <table class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                       <tr>
+                        <th>#</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -98,15 +99,22 @@
                     <tbody>
                       @foreach($data as $data)
                       <tr class="gradeX">
-                        <td>{{$data->first_name}} {{$data->last_name}}</td>
+                        <td>{{ $num++ }}</td>
+                        <td>{{$data->first_name_ru}} {{$data->last_name_ru}}</td>
                         <td>{{$data->email}}</td>
                         <td>{{$data->phone}}</td>
                         <td>{{$data->date_of_birth}}</td>
                         <td>{{$data->clinic}}</td>
-                        <td>{{$data->specialities}}</td>
-                        <td>{{$data->workDays}}</td>
-                        <td>{{$data->experience}}</td>
-                        <td>{{$data->summary}}</td>
+                        <td>
+                          <ul style="padding: 0 15px; margin: 0;">
+                            @foreach($data->specialities as $speciality)
+                            <li>{{ $speciality->name_ru }}</li>
+                            @endforeach
+                          </ul>
+                        </td>
+                        <td>{{$data->workDays}} 12:00 - 16:00</td>
+                        <td>{{$data->experience}} year</td>
+                        <td>{{$data->summary_ru}}</td>
                         <td>{{$data->image}}</td>
                         <td class="center"><a href="{{route('admin.editDoctor', $data->id)}}">Edit</a></td>
                       </tr>

@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Clinic;
-use App\Models\ClinicType;
-use App\Models\ClinicCategory;
 use App\Models\Doctor;
+
+use App\Models\ClinicCategory;
+use App\Models\Address;
 use App\Models\Link;
 use App\Models\WorkingDay;
-use App\Models\ClinicAddress;
+use App\Models\ClinicType;
 use App\Models\Speciality;
 use App\Models\State;
+use App\Models\City;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -28,10 +30,6 @@ class AdminController extends Controller
     return view('dashboards.admins.index');
   }
 
-  // function profile() {
-  //     return view('dashboards.admins.profile');
-  // }
-
   public function users()
   {
     // $posts = Post::latest()->with('user', 'likes')->paginate(10);
@@ -39,15 +37,6 @@ class AdminController extends Controller
     $data = User::all();
 
     return view("dashboards.admins.components.userTable", compact("data"));
-    // $address = address::all();
-    // $num = 1;
-
-    // $users = DB::table('users')
-    //     ->join('addresses', 'users.address', 'addresses.id')
-    //     ->select('users.*', 'addresses.*')
-    //     ->get();
-
-    // return view("admin.users", compact("data", "num", "address", "users"));
   }
 
   function addClinic()
@@ -219,11 +208,9 @@ class AdminController extends Controller
   public function doctors()
   {
     $data = Doctor::all();
-    // $doctor = DB::table('doctors')
-    //   ->join('clinic_work_days', 'doctors.workDays', 'clinic_work_days.id')
-    //   ->select('doctors.*', 'clinic_work_days.*')
-    //   ->get();
-    return view('dashboards.admins.components.doctorsTable', compact("data"));
+    $num = 1;
+
+    return view('dashboards.admins.components.doctorsTable', compact("data", "num"));
   }
 
   public function addDoctor()
@@ -318,6 +305,12 @@ class AdminController extends Controller
 
   public function tab()
   {
+    $doctor = Doctor::find(1);
+
+    // $specialityids = [1, 3, 6, 9];
+    // $doctor->specialities()->attach($specialityids);
+
+    // dd($doctor->workingDay);
     return view('dashboards.admins.components.tab');
   }
 }

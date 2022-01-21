@@ -124,7 +124,7 @@
                                     <label for="owner">
                                       Owner
                                     </label>
-                                    <select name="owner" id="owner"class="select2_demo_1 form-control">
+                                    <select name="owner" id="owner" class="select2_demo_1 form-control">
                                       <option></option>
                                       @foreach($owner as $owner)
                                       <option value="{{$owner->id}}">{{$owner->last_name}} {{$owner->first_name}}</option>

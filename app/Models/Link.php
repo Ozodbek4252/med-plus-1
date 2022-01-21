@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\models\Clinic;
 
 class Link extends Model
 {
@@ -20,6 +21,6 @@ class Link extends Model
 
     public function clinic()
     {
-        // return $this->hasOne(Clinic::class);
+        return $this->hasOne(Clinic::class);
     }
 }

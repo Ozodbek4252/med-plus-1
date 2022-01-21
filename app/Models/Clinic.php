@@ -4,50 +4,57 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\models\ClinicAddress;
-use App\models\ClinicLink;
-use App\models\ClinicWorkDay;
+use App\models\Address;
+use App\models\Link;
 use App\models\Doctor;
-use App\models\User;
+use App\models\WorkingDay;
+use App\models\ClinicCategory;
+use App\models\ClinicType;
 
 class Clinic extends Model
 {
     use HasFactory;
 
+    protected $table = 'clinics';
+
     protected $fillable = [
+        'user_id',
         'name',
         'phone',
-        'address',
-        'link',
-        'phone',
-        'address',
-        'workday',
-        'workday',
-        'location'
+        'location',
+        'logo',
+        'info_ru',
+        'info_uz',
+        'type',
     ];
 
-    public function clinicAddress()
+    public function address()
     {
-        return $this->hasOne(ClinicAddress::class, 'clinic_id', 'address');
+        return $this->hasOne(Address::class);
     }
-
-    public function owner()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
+    
     public function link()
     {
-        return $this->hasOne(Link::class, 'clinic_id', 'link');
+        return $this->hasOne(Link::class);
     }
 
-    public function clinicWorkDay()
+    public function workingDay()
     {
-        return $this->hasOne(ClinicWorkDay::class);
+        return $this->hasOne(WorkingDay::class);
     }
 
-    public function doctor()
+    public function doctors()
     {
-        return $this->hasMany(Doctor::class);
+        return $this->belongsToMany(Doctor::class, 'doctor_specialities');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(ClinicCategory::class, 'clinic_clinic_categories');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(ClinicType::class, 'clinic_clinic_categories');
     }
 }
