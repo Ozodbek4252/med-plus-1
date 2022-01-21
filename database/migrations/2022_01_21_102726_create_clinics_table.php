@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateClinicsTable extends Migration
 {
-    /**
-     * Run the migrations.
+    /* Run the migrations.
      *
      * @return void
      */
@@ -15,20 +14,19 @@ class CreateClinicsTable extends Migration
     {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('address')->nullable();
-            $table->string('link')->nullable();
-            $table->string('workday')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
             $table->string('location')->nullable();
             $table->string('logo')->nullable();
+            $table->string('info_ru')->nullable();
+            $table->string('info_uz')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
+    /* Reverse the migrations.
      *
      * @return void
      */

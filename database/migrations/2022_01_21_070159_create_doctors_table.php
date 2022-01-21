@@ -15,17 +15,17 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('first_name_ru')->nullable();
+            $table->string('first_name_uz')->nullable();
+            $table->string('last_name_ru')->nullable();
+            $table->string('last_name_uz')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->string('date_of_birth')->nullable();
-            $table->string('clinic')->nullable();
-            $table->string('specialities')->nullable();
-            $table->string('workDays')->nullable();
             $table->string('experience')->nullable();
-            $table->string('summary')->nullable();
+            $table->string('summary_ru')->nullable();
+            $table->string('summary_uz')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\models\Doctor;
 
 class Speciality extends Model
 {
@@ -14,8 +15,8 @@ class Speciality extends Model
         'name_uz',
     ];
 
-    public function doctor()
+    public function doctors()
     {
-        // return $this->belongsTo(Doctor::class);
+        return $this->belongsToMany(Doctor::class, 'doctor_specialities');
     }
 }

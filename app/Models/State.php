@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\models\Address;
 
 class State extends Model
 {
@@ -13,4 +14,9 @@ class State extends Model
         'state_ru',
         'state_uz',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }
