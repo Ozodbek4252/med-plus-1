@@ -36,9 +36,9 @@ class Address extends Model
         return $this->hasOne(Clinic::class);
     }
 
-    public function state()
+    public function states()
     {
-        return $this->hasOne(State::class);
+        return $this->belongsTo(State::class, 'state');
     }
 
     // public function city()

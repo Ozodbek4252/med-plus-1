@@ -95,8 +95,8 @@
                     <tbody>
                       @foreach($clinics as $clinic)
                       <tr class="gradeX">
-                        <td>{{$clinic->owner->last_name}} {{$clinic->owner->first_name}}</td>
                         <td>{{ $clinic->name }}</td>
+                        <td>Owner</td>
                         <td>{{ $clinic->phone }}</td>
                         <td>{{ optional($clinic->clinicAddress)->city }} {{ optional($clinic->clinicAddress)->state }}</td>
                         <td class="center">

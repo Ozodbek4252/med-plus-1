@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAddressesTable extends Migration
 {
-    /**
-     * Run the migrations.
+    /* Run the migrations.
      *
      * @return void
      */
@@ -17,8 +16,8 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->integer('clinic_id')->nullable();
             $table->integer('doctor_id')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
+            $table->integer('state')->nullable();
+            $table->integer('city')->nullable();
             $table->string('street_ru')->nullable();
             $table->string('street_uz')->nullable();
             $table->string('apartment_ru')->nullable();
@@ -29,8 +28,7 @@ class CreateAddressesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
+    /* Reverse the migrations.
      *
      * @return void
      */

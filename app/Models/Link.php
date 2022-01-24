@@ -21,6 +21,6 @@ class Link extends Model
 
     public function clinic()
     {
-        return $this->hasOne(Clinic::class);
+        return $this->belongsTo(Clinic::class);
     }
 }

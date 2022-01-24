@@ -160,7 +160,7 @@
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="speciality">Специальности</label>
-                                    <select id="speciality" name="speciality[]" class="form-control dual_select" multiple>
+                                    <select required id="speciality" name="speciality[]" class="form-control dual_select" multiple>
                                       @foreach($specialities as $speciality)
                                       <option value="{{$speciality->id}}">{{$speciality->name_ru}}</option>
                                       @endforeach
@@ -183,10 +183,10 @@
                                   <div class="col-md-12">
                                     <label for="clinics">Клиники</label>
                                     <select id="clinics" name="clinics[]" class="form-control dual_select" multiple>
-                                      <option value="">dsfsd</option>
-                                      <option value="">dsfsahjkhjsd</option>
-                                      <option value="">dsfhsd</option>
-                                      <option value="">dsffwesd</option>
+                                      <option value="1">dsfsd</option>
+                                      <option value="2">dsfsahjkhjsd</option>
+                                      <option value="3">dsfhsd</option>
+                                      <option value="4">dsffwesd</option>
                                     </select>
                                   </div>
                                 </div>

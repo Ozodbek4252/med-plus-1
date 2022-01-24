@@ -17,6 +17,6 @@ class ClinicCategory extends Model
 
   public function clinics()
   {
-    return $this->belongsToMany(Clinic::class, 'clinic_clinic_categories');
+    return $this->hasMany(Clinic::class, 'category');
   }
 }
