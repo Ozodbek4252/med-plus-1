@@ -24,6 +24,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+  public function logout()
+  {
+    dd(Auth::user());
+    Session::flush();
+    Auth::logout();
+
+    return view('home');
+  }
 
   function index()
   {
@@ -39,159 +47,122 @@ class AdminController extends Controller
     return view("dashboards.admins.components.userTable", compact("data"));
   }
 
+  public function clinics()
+  {
+    $clinics = Clinic::all();
+
+    return view(
+      "dashboards.admins.components.clinicTable",
+      compact("clinics")
+    );
+  }
+
   function addClinic()
   {
     $clinic = Clinic::all();
-    $address = ClinicAddress::all();
-    // $clinic[0]->clinicAddress;
-    // $address[0]->clinic;
-    
-    
-    
     $owner = User::all();
     $clinicCategory = ClinicCategory::all();
     $clinicType = ClinicType::all();
     $doctors = Doctor::all();
     $states = State::all();
 
-
-    return view('dashboards.admins.components.addClinic', 
-                compact('owner', 'clinicCategory', 'clinicType', 'doctors', 'states'));
+    return view(
+      'dashboards.admins.components.addClinic',
+      compact('owner', 'clinicCategory', 'clinicType', 'doctors', 'states')
+    );
   }
 
-  public function logout()
+  function addClinicSave(Request $request)
   {
-    dd(Auth::user());
-    Session::flush();
-
-    Auth::logout();
-
-    return view('home');
-  }
-
-  function addClinicSave(Request $request, $id)
-  {
-    $data = User::all();
-    dd(gettype($request->logo));
-    $request->logo->move('admins', "ok.png");
-
     $clinic = new Clinic;
-    $clinicLink = new ClinicLink;
-    $clinicWorkDay = new ClinicWorkDay;
-    $clinicAddress = new ClinicAddress;
-
-    $clinic->user_id = intval($id);
     $clinic->name = $request->name;
     $clinic->phone = $request->phone;
-    // $clinic->logo = $request->logo;
-    $clinic->save();
+    // location and image are required
+    $clinic->info_ru = $request->info_ru;
+    $clinic->info_uz = $request->info_uz;
+    $clinic->type = $request->type;
+    $clinic->user_id = $request->owner;
+    // $clinic->category = $request->category;
+    $clinic->save();	
+
+    $doctorsids = $request->doctors;
+    $clinic->doctors()->attach($doctorsids);
 
     if ($request->tg != null || $request->fb != null || $request->insta != null || $request->email != null) {
-      $clinicLink->clinic_id = $clinic->id;
-      $clinicLink->tg = $request->tg;
-      $clinicLink->fb = $request->fb;
-      $clinicLink->email = $request->email;
-      $clinicLink->insta = $request->insta;
-      $clinicLink->save();
-      $clinic->link = $clinicLink->id;
+      $link = new Link;
+      $link->clinic_id = $clinic->id;
+      $link->tg = $request->tg;
+      $link->fb = $request->fb;
+      $link->email = $request->email;
+      $link->insta = $request->insta;
+      $link->save();
     }
-
     if (
       $request->mon != null || $request->tue != null || $request->wed != null ||
       $request->thu != null || $request->fri != null || $request->sat != null ||
       $request->sun != null
     ) {
-      $clinicWorkDay->clinic_id = $clinic->id;
+      $workingDay = new WorkingDay;
+      $workingDay->clinic_id = $clinic->id;
       if ($request->mon != null) {
-        $clinicWorkDay->mon = $request->monstart . ' - ' . $request->monend;
+        $workingDay->mon = $request->monstart . ' - ' . $request->monend;
       }
       if ($request->tue != null) {
-        $clinicWorkDay->tue = $request->tuestart . ' - ' . $request->tueend;
+        $workingDay->tue = $request->tuestart . ' - ' . $request->tueend;
       }
       if ($request->wed != null) {
-        $clinicWorkDay->wed = $request->wedstart . ' - ' . $request->wedend;
+        $workingDay->wed = $request->wedstart . ' - ' . $request->wedend;
       }
       if ($request->thu != null) {
-        $clinicWorkDay->thu = $request->thustart . ' - ' . $request->thuend;
+        $workingDay->thu = $request->thustart . ' - ' . $request->thuend;
       }
       if ($request->fri != null) {
-        $clinicWorkDay->fri = $request->fristart . ' - ' . $request->friend;
+        $workingDay->fri = $request->fristart . ' - ' . $request->friend;
       }
       if ($request->sat != null) {
-        $clinicWorkDay->sat = $request->satstart . ' - ' . $request->satend;
+        $workingDay->sat = $request->satstart . ' - ' . $request->satend;
       }
       if ($request->sun != null) {
-        $clinicWorkDay->sun = $request->sunstart . ' - ' . $request->sunend;
+        $workingDay->sun = $request->sunstart . ' - ' . $request->sunend;
       }
-      $clinicWorkDay->save();
-      $clinic->workday = $clinicWorkDay->id;
+      $workingDay->save();
     }
 
-    $clinicAddress->clinic_id = $clinic->id;
-    if ($request->state != 'Choose...') {
-      $clinicAddress->state = $request->state;
+    $address = new Address;
+    $address->clinic_id = $clinic->id;
+    if ($request->state_ru != 'Choose...' || $request->state_ru != null) {
+      $address->state = intval($request->state_ru);
     } else {
-      $clinicAddress->state = null;
+      $address->state = null;
     }
-    $clinicAddress->city = $request->city;
-    $clinicAddress->street = $request->street;
-    $clinicAddress->apartment = $request->apartment;
-    $clinicAddress->save();
-    $clinic->address = $clinicAddress->id;
+    $address->city = $request->city_ru;
 
+    $address->street_ru = $request->street_ru;
+    $address->street_uz = $request->street_uz;
+    $address->apartment_ru = $request->apartment_ru;
+    $address->apartment_uz = $request->apartment_uz;
+    $address->moljal_ru = $request->moljal_ru;
+    $address->moljal_uz = $request->moljal_uz;
+    $address->save();
+    $clinicAddress = Address::find($clinic->addressed);
+    
+    // logo, map, gallery
     // foreach ($files as $file) {//this statement will loop through all files.
     //     $file_name = $file->getClientOriginalName(); //Get file original name
     //     $file->move('admins' , $file_name); // move files to destination folder
     // }
 
-
-    $image = $request->myImage;
-    $imagename = time() . $image;
-
-    // Storage::disk('public')->put('images', $imagename);
+    // $image = $request->myImage;
+    // $imagename = time() . $image;
 
 
-    $request->myImage->move('admins', "ok.png");
-    $clinic->myImage = $imagename;
+    // $request->myImage->move('admins', "ok.png");
+    // $clinic->myImage = $imagename;
 
 
-    $clinic->save();
+    // $clinic->save();
 
-    return redirect()->route('admin.users');
-  }
-
-  public function clinics()
-  {
-
-    $clinics = Clinic::all();
-    $owner = User::all();
-    // change to Address which is new model
-    $clinicAddress = ClinicAddress::all();
-    $workingDay = WorkingDay::all();
-    $link = Link::all();
-    foreach($clinicAddress as $clinicAddress){
-      if($clinicAddress->state==null) {
-        $clinicAddress->state = 0;
-      }
-      if($clinicAddress->city==null){
-        $clinicAddress->city = 0;
-      }
-      if($clinicAddress->street==null){
-        $clinicAddress->street = 0;
-      }
-      if($clinicAddress->apartment==null){
-        $clinicAddress->apartment = 0;
-      }
-    }
-
-    // dd($clinics[0]->clinicAddress->street);
-    
-    // dd($clinics[0]->owner);
-    // dd($clinic[0]->link);
-    // dd($clinic[0]->clinicAddress);
-
-    return view("dashboards.admins.components.clinicTable", 
-              compact("clinics", "clinicAddress", "workingDay", "link"));
+    return redirect()->route('admin.clinics');
   }
 
   public function editClinic(Request $request, $id)
@@ -205,6 +176,8 @@ class AdminController extends Controller
     return view('dashboards.admins.components.editClinic', compact("data", "address", "link", "workday"));
   }
 
+
+  // Doctors
   public function doctors()
   {
     $data = Doctor::all();
@@ -249,16 +222,15 @@ class AdminController extends Controller
     if ($req->get('experience')) {
       $doctor->experience = $req->get('experience');
     }
-    
+    $doctor->save();
 
-    // dd($req->image->extension());
+    $specialityids = $req->speciality;
+    $doctor->specialities()->attach($specialityids);
+
+    $clinics = $req->clinics;
+    $doctor->clinics()->attach($clinics);
+
     // image
-
-    $doctor->clinic = intval($req->clinic);
-
-    if ($req->speciality) {
-      $doctor->specialities = implode(", ", $req->get('speciality'));
-    }
 
     $doctor->save();
     if (
@@ -266,41 +238,31 @@ class AdminController extends Controller
       $req->thu != null || $req->fri != null || $req->sat != null ||
       $req->sun != null
     ) {
-      $workDay = new ClinicWorkDay;
-      $workDay->doctor_id = $doctor->id;
+      $workingDay = new WorkingDay;
+      $workingDay->doctor_id = $doctor->id;
       if ($req->mon != null) {
-        $workDay->mon = $req->monstart . ' - ' . $req->monend;
+        $workingDay->mon = $req->monstart . ' - ' . $req->monend;
       }
       if ($req->tue != null) {
-        $workDay->tue = $req->tuestart . ' - ' . $req->tueend;
+        $workingDay->tue = $req->tuestart . ' - ' . $req->tueend;
       }
       if ($req->wed != null) {
-        $workDay->wed = $req->wedstart . ' - ' . $req->wedend;
+        $workingDay->wed = $req->wedstart . ' - ' . $req->wedend;
       }
       if ($req->thu != null) {
-        $workDay->thu = $req->thustart . ' - ' . $req->thuend;
+        $workingDay->thu = $req->thustart . ' - ' . $req->thuend;
       }
       if ($req->fri != null) {
-        $workDay->fri = $req->fristart . ' - ' . $req->friend;
+        $workingDay->fri = $req->fristart . ' - ' . $req->friend;
       }
       if ($req->sat != null) {
-        $workDay->sat = $req->satstart . ' - ' . $req->satend;
+        $workingDay->sat = $req->satstart . ' - ' . $req->satend;
       }
       if ($req->sun != null) {
-        $workDay->sun = $req->sunstart . ' - ' . $req->sunend;
+        $workingDay->sun = $req->sunstart . ' - ' . $req->sunend;
       }
-      $workDay->save();
-      $doctor->workDays = $workDay->id;
-      $doctor->save();
+      $workingDay->save();
     }
-
-    if ($req->get('experience')) {
-      $doctor->experience = $req->get('experience');
-    }
-    if ($req->get('summary')) {
-      $doctor->summary = $req->get('summary');
-    }
-
     $doctor->save();
 
     return redirect()->route('admin.doctors');

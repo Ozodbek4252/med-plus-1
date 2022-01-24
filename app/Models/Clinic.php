@@ -33,9 +33,9 @@ class Clinic extends Model
         return $this->hasOne(Address::class);
     }
     
-    public function link()
+    public function links()
     {
-        return $this->hasOne(Link::class);
+        return $this->hasOne(Link::class, 'clinic_id');
     }
 
     public function workingDay()
@@ -45,16 +45,16 @@ class Clinic extends Model
 
     public function doctors()
     {
-        return $this->belongsToMany(Doctor::class, 'doctor_specialities');
+        return $this->belongsToMany(Doctor::class, 'clinic_doctors');
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(ClinicCategory::class, 'clinic_clinic_categories');
+        return $this->belongsTo(ClinicCategory::class, 'category');
     }
 
     public function type()
     {
-        return $this->belongsTo(ClinicType::class, 'clinic_clinic_categories');
+        return $this->belongsTo(ClinicType::class, 'type');
     }
 }

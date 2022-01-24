@@ -22,6 +22,7 @@ class CreateClinicsTable extends Migration
             $table->string('info_ru')->nullable();
             $table->string('info_uz')->nullable();
             $table->string('type')->nullable();
+            $table->string('category')->nullable();
             $table->timestamps();
         });
     }

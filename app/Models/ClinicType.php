@@ -15,7 +15,8 @@ class ClinicType extends Model
         'type_ru',
     ];
 
-    public function clinics() {
+    public function clinics()
+    {
         return $this->hasMany(Clinic::class, 'type');
     }
 }
