@@ -156,7 +156,6 @@
                             <div class="ibox">
                               <div class="ibox-content">
 
-                                $specialities
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="speciality">Специальности</label>

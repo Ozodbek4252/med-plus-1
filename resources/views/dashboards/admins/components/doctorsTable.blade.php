@@ -75,6 +75,7 @@
                       </tr>
                     </thead>
                     <tbody>
+
                       @foreach($data as $data)
                       <tr class="gradeX">
                         <td>{{ $num++ }}</td>
@@ -82,7 +83,13 @@
                         <td>{{$data->email}}</td>
                         <td>{{$data->phone}}</td>
                         <td>{{$data->date_of_birth}}</td>
-                        <td>{{$data->clinic}}</td>
+                        <td>
+                          @if($data->clinics)
+                          @foreach($data->clinics as $clinic)
+                          {{$clinic->name}}
+                          @endforeach
+                          @endif
+                        </td>
                         <td>
                           <ul style="padding: 0 15px; margin: 0;">
                             @foreach($data->specialities as $speciality)
@@ -90,8 +97,52 @@
                             @endforeach
                           </ul>
                         </td>
-                        <td>{{$data->workDays}} 12:00 - 16:00</td>
-                        <td>{{$data->experience}} year</td>
+                        <td>
+                          @if($data->workingDay)
+                          <ul style="padding-left: 15px; width: 100px;">
+                            @if($data->workingDay->mon)
+                            <li>
+                              {{$data->workingDay->mon}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->tue)
+                            <li>
+                              {{$data->workingDay->tue}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->wed)
+                            <li>
+                              {{$data->workingDay->wed}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->thu)
+                            <li>
+                              {{$data->workingDay->thu}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->fri)
+                            <li>
+                              {{$data->workingDay->fri}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->sat)
+                            <li>
+                              {{$data->workingDay->sat}}
+                            </li>
+                            @endif
+                            @if($data->workingDay->sun)
+                            <li>
+                              {{$data->workingDay->sun}}
+                            </li>
+                            @endif
+                          </ul>
+                          @endif
+                        </td>
+                        <td>
+                          @if($data->experience)
+                          {{$data->experience}} year
+                          @endif
+                        </td>
                         <td>{{$data->summary_ru}}</td>
                         <td>{{$data->image}}</td>
                         <td class="center"><a href="{{route('admin.editDoctor', $data->id)}}">Edit</a></td>
