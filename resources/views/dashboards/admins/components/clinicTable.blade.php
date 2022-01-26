@@ -98,31 +98,88 @@
                         <td>{{ $clinic->name }}</td>
                         <td>Owner</td>
                         <td>{{ $clinic->phone }}</td>
-                        <td>{{ optional($clinic->clinicAddress)->city }} {{ optional($clinic->clinicAddress)->state }}</td>
+                        <td>
+                          <table>
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @if(optional($clinic->address)->apartment_ru)
+                              <tr>
+                                <td>Apart.:</td>
+                                <td style="padding-left: 5px;">{{ optional($clinic->address)->apartment_ru }}</td>
+                              </tr>
+                              @endif
+                              @if(optional($clinic->address)->street_ru)
+                              <tr>
+                                <td>Str:</td>
+                                <td style="padding-left: 5px;">{{ optional($clinic->address)->street_ru }}</td>
+                              </tr>
+                              @endif
+                              @if(optional($clinic->address)->city)
+                              <tr>
+                                <td>City:</td>
+                                <td style="padding-left: 5px;">{{ optional($clinic->address)->city }}</td>
+                              </tr>
+                              @endif
+                              @if(optional($clinic->address)->state)
+                              <tr>
+                                <td>State:</td>
+                                <td style="padding-left: 5px;">{{ optional(optional($clinic->address)->states)->state_ru }}</td>
+                              </tr>
+                              @endif
+                            </tbody>
+                          </table>
+                        </td>
                         <td class="center">
                           <ul style="padding: 0">
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
-                            <li style="list-style-type: none;">Mon: 12:30 - 06:00</li>
+                            @if(optional($clinic->workingDay)->mon)
+                              <li style="list-style-type: none;">Mon: {{$clinic->workingDay->mon}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->tue)
+                              <li style="list-style-type: none;">Tue: {{$clinic->workingDay->tue}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->wed)
+                              <li style="list-style-type: none;">Wed: {{$clinic->workingDay->wed}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->thu)
+                              <li style="list-style-type: none;">Thu: {{$clinic->workingDay->thu}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->fri)
+                              <li style="list-style-type: none;">Fri: {{$clinic->workingDay->fri}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->sat)
+                              <li style="list-style-type: none;">Sat: {{$clinic->workingDay->sat}}</li>
+                            @endif
+                            @if(optional($clinic->workingDay)->sun)
+                              <li style="list-style-type: none;">Sun: {{$clinic->workingDay->sun}}</li>
+                            @endif
                           </ul>
                         </td>
                         <td class="center">
                           <ul style="padding: 0">
-                            <li style="list-style-type: none;">email</li>
-                            <li style="list-style-type: none;">tg</li>
-                            <li style="list-style-type: none;">fb</li>
-                            <li style="list-style-type: none;">insta</li>
+                            @if(optional($clinic->links)->email)
+                              <li style="list-style-type: none;">Email: {{$clinic->links->email}}</li>
+                            @endif
+                            @if(optional($clinic->links)->tg)
+                              <li style="list-style-type: none;">Tg: {{$clinic->links->tg}}</li>
+                            @endif
+                            @if(optional($clinic->links)->fb)
+                              <li style="list-style-type: none;">Fb: {{$clinic->links->fb}}</li>
+                            @endif
+                            @if(optional($clinic->links)->insta)
+                              <li style="list-style-type: none;">Insta: {{$clinic->links->insta}}</li>
+                            @endif
                           </ul>
                         </td>
                         <td class="center">logo</td>
                         <td class="center">location</td>
                         <td class="center"><a href="">Edit</a></td>
                       </tr>
-                      @endforeach
+                    @endforeach
                     </tbody>
                   </table>
                 </div>

@@ -75,18 +75,32 @@ class AdminController extends Controller
   function addClinicSave(Request $request)
   {
     $clinic = new Clinic;
-    $clinic->name = $request->name;
-    $clinic->phone = $request->phone;
+    if ($request->get('name')) {
+      $clinic->name = $request->name;
+    }
+    if ($request->get('phone')) {
+      $clinic->phone = $request->phone;
+    }
     // location and image are required
-    $clinic->info_ru = $request->info_ru;
-    $clinic->info_uz = $request->info_uz;
-    $clinic->type = $request->type;
-    $clinic->user_id = $request->owner;
+    if ($request->get('phone')) {
+      $clinic->info_ru = $request->info_ru;
+    }
+    if ($request->get('phone')) {
+      $clinic->info_uz = $request->info_uz;
+    }
+    if ($request->get('phone')) {
+      $clinic->type = $request->type;
+    }
+    if ($request->get('phone')) {
+      $clinic->user_id = $request->owner;
+    }
     // $clinic->category = $request->category;
-    $clinic->save();	
+    $clinic->save();
 
-    $doctorsids = $request->doctors;
-    $clinic->doctors()->attach($doctorsids);
+    if ($request->doctors) {
+      $doctorsids = $request->doctors;
+      $clinic->doctors()->attach($doctorsids);
+    }
 
     if ($request->tg != null || $request->fb != null || $request->insta != null || $request->email != null) {
       $link = new Link;
@@ -137,15 +151,27 @@ class AdminController extends Controller
     }
     $address->city = $request->city_ru;
 
-    $address->street_ru = $request->street_ru;
-    $address->street_uz = $request->street_uz;
-    $address->apartment_ru = $request->apartment_ru;
-    $address->apartment_uz = $request->apartment_uz;
-    $address->moljal_ru = $request->moljal_ru;
-    $address->moljal_uz = $request->moljal_uz;
+    if ($request->get('street_ru')) {
+      $address->street_ru = $request->street_ru;
+    }
+    if ($request->get('street_uz')) {
+      $address->street_uz = $request->street_uz;
+    }
+    if ($request->get('apartment_ru')) {
+      $address->apartment_ru = $request->apartment_ru;
+    }
+    if ($request->get('apartment_uz')) {
+      $address->apartment_uz = $request->apartment_uz;
+    }
+    if ($request->get('moljal_ru')) {
+      $address->moljal_ru = $request->moljal_ru;
+    }
+    if ($request->get('moljal_uz')) {
+      $address->moljal_uz = $request->moljal_uz;
+    }
     $address->save();
     $clinicAddress = Address::find($clinic->addressed);
-    
+
     // logo, map, gallery
     // foreach ($files as $file) {//this statement will loop through all files.
     //     $file_name = $file->getClientOriginalName(); //Get file original name
@@ -227,8 +253,10 @@ class AdminController extends Controller
     $specialityids = $req->speciality;
     $doctor->specialities()->attach($specialityids);
 
-    $clinics = $req->clinics;
-    $doctor->clinics()->attach($clinics);
+    if ($req->clinics) {
+      $clinics = $req->clinics;
+      $doctor->clinics()->attach($clinics);
+    }
 
     // image
 

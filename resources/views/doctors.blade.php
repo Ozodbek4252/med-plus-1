@@ -230,46 +230,79 @@
                 <div class="col-lg-8">
                   <div class="card-right">
                     <div class="card-full_name">
-                      Dr. Henry House
+                      @if($data->last_name_ru)
+                        {{$data->last_name_ru}}
+                      @elseif($data->last_name_uz)
+                        {{$data->last_name_uz}}
+                      @endif 
+                      @if($data->first_name_ru)
+                        {{$data->first_name_ru}}
+                      @elseif($data->first_name_uz)
+                        {{$data->first_name_uz}}
+                      @endif
                     </div>
                     <div class="card-speciality">
-                      Радиолог
+                      @foreach($data->specialities as $speciality)
+                        {{$speciality->name_ru}},
+                      @endforeach
                     </div>
                     <div class="card-expreience">
-                      12 yil
+                      @if($data->experience)
+                        {{$data->experience}} годы
+                      @endif
                     </div>
                     <div class="card-cilinic">
-                      <span>
-                        <i class="fas fa-hospital"></i>
-                      </span>
-                      Clinic Name
+                      @if($data->clinics)
+                        <span>
+                          <i class="fas fa-hospital"></i>
+                        </span>
+                        @foreach($data->clinics as $clinic)
+                          {{$clinic->name}},
+                        @endforeach
+                      @endif
                     </div>
-                    <div class="card-address card-address-doctor">
+                    <!-- <div class="card-address card-address-doctor">
                       <i class="fas fa-map-marker-alt"></i>
-                      <p>Алмазарский район, г. Ташкент, проезд Лабзак, 10 Лабзак, Напротив главного входа парка Локомотив Анхор</p>
-                    </div>
+                      <p>
+                        Алмазарский район, г. Ташкент, проезд Лабзак, 10 Лабзак, Напротив главного входа парка Локомотив Анхор
+                      </p>
+                    </div> -->
 
-                    <div class="card-metro">
+                    <!-- <div class="card-metro">
                       <i class="fab fa-monero"></i><span>Minor</span>
-                    </div>
-                    <div class="card-time">
+                    </div> -->
+                    <div class="card-time" style="margin-bottom: 10px;">
                       <i class="far fa-clock"></i>
                       <ul>
-                        <li></li>
-                        <li style="line-height: 100%;">Mon: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Tue: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Wed: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Thu: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Fri: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Sat: 9:30 - 6:00</li>
-                        <li style="line-height: 100%;">Sun: 9:30 - 6:00</li>
-
+                        @if(optional($data->workingDay)->mon)
+                          <li style="line-height: 100%;">Mon: {{$data->workingDay->mon}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->tue)
+                          <li style="line-height: 100%;">Tue: {{$data->workingDay->tue}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->wed)
+                          <li style="line-height: 100%;">Wed: {{$data->workingDay->wed}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->thu)
+                          <li style="line-height: 100%;">Thu: {{$data->workingDay->thu}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->fri)
+                          <li style="line-height: 100%;">Fri: {{$data->workingDay->fri}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->sat)
+                          <li style="line-height: 100%;">Sat: {{$data->workingDay->sat}}</li>
+                        @endif  
+                        @if(optional($data->workingDay)->sun)
+                          <li style="line-height: 100%;">Sun: {{$data->workingDay->sun}}</li>
+                        @endif  
                       </ul>
                     </div>
                     <div class="card-phone">
                       <a href="tel:+998944424252">
+                        @if($data->phone)
                         <i class="fas fa-phone-alt"></i>
-                        +998 94 442 42 52
+                        {{$data->phone}}
+                        @endif
                       </a>
                     </div>
                     <div class="card-btns">
